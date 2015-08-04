@@ -7,6 +7,7 @@
 //
 
 #import "UOViewController.h"
+#import "UOTestObject.h"
 
 @interface UOViewController ()
 

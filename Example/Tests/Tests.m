@@ -8,39 +8,31 @@
 
 // https://github.com/Specta/Specta
 
+#import "UOTestObject.h"
+
 SpecBegin(InitialSpecs)
 
-describe(@"these will fail", ^{
-
-    it(@"can do maths", ^{
-        expect(1).to.equal(2);
-    });
-
-    it(@"can read", ^{
-        expect(@"number").to.equal(@"string");
+describe(@"Initializing UOTestObject", ^{
+    it(@"should create test object", ^{
+        expect([UOTestObject new]).toNot.beNil;
     });
     
-    it(@"will wait for 10 seconds and fail", ^{
-        waitUntil(^(DoneCallback done) {
-        
-        });
+    it(@"have dynamic property", ^{
+        expect([UOTestObject new].name).to.beNil;
     });
 });
 
-describe(@"these will pass", ^{
-    
-    it(@"can do maths", ^{
-        expect(1).beLessThan(23);
+describe(@"Initializing UOMutableTestObject", ^{
+    it(@"should create mutable object", ^{
+        expect([UOMutableTestObject new]).toNot.beNil;
     });
     
-    it(@"can read", ^{
-        expect(@"team").toNot.contain(@"I");
-    });
-    
-    it(@"will wait and succeed", ^{
-        waitUntil(^(DoneCallback done) {
-            done();
-        });
+    it(@"can set attributes", ^{
+        UOMutableTestObject *mutableObject = [UOMutableTestObject new];
+        expect(mutableObject.phoneNumber).to.beNil;
+        NSString *phoneNumber = @"+001012345678";
+        mutableObject.phoneNumber = phoneNumber;
+        expect(mutableObject.phoneNumber).to.equal(phoneNumber);
     });
 });
 
