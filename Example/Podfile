@@ -1,0 +1,13 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'UltraObject_Example', :exclusive => true do
+  pod "UltraObject", :path => "../"
+end
+
+target 'UltraObject_Tests', :exclusive => true do
+  pod "UltraObject", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
