@@ -8,5 +8,5 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UOObject : NSObject
+@interface UOObject : NSObject<NSCopying, NSMutableCopying>
 @end

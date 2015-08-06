@@ -9,6 +9,7 @@
 // https://github.com/Specta/Specta
 
 #import "UOTestObject.h"
+#import "UOObjectManager.h"
 
 SpecBegin(InitialSpecs)
 
@@ -19,6 +20,10 @@ describe(@"Initializing UOTestObject", ^{
     
     it(@"have dynamic property", ^{
         expect([UOTestObject new].name).to.beNil;
+    });
+    
+    it(@"should create mutable object", ^{
+        expect([[UOTestObject new] mutableCopy]).to.beInstanceOf(UOMutableTestObject.class);
     });
 });
 
@@ -36,5 +41,10 @@ describe(@"Initializing UOMutableTestObject", ^{
     });
 });
 
-SpecEnd
+describe(@"Initializing UOObjectManager", ^{
+    it(@"should create object manager", ^{
+        expect([UOObjectManager new]).toNot.beNil;
+    });
+});
 
+SpecEnd
