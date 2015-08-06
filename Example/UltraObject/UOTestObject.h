@@ -9,9 +9,13 @@
 #import <UltraObject/UOObject.h>
 #import <UltraObject/UOMutableObject.h>
 
+@protocol UOTestObject <NSObject>
+@end
+
 @interface UOTestObject : UOObject
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *phoneNumber;
+@property (nonatomic, readonly) NSArray<UOTestObject> *testObjects;
 @end
 
 @interface UOMutableTestObject : UOTestObject<UOMutableObject>

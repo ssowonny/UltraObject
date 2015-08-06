@@ -9,9 +9,8 @@
 #import "UOTestObject.h"
 
 @implementation UOTestObject
-@dynamic name, phoneNumber;
 @end
 
 @implementation UOMutableTestObject
-@dynamic name, phoneNumber;
+@synthesize name, phoneNumber;
 @end

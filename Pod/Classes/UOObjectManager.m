@@ -65,7 +65,7 @@ static UOObjectManager *__sharedManager;
 - (id)objectWithClass:(Class)klass forJSON:(NSDictionary *)json {
     UOID ID = json[UOObjectIDKey];
     UOObject *object = [self objectWithClass:klass forID:ID];
-    [object loadJSON:json];
+    [object mergeFromDictionary:json useKeyMapping:YES];
     return object;
 }
 
