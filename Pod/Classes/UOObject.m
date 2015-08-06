@@ -11,22 +11,22 @@
 #import "NSString+Conversion.h"
 #import "UOObjectManager.h"
 #import "UOMutableObject.h"
+#import "UOObject+Protected.h"
 
 @interface UOObject () {
     Class _mutableClass;
 }
-
 @property (nonatomic, strong) NSMutableDictionary *objectAttributes;
 @end
 
 @implementation UOObject
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-    self = [super init];
-    if (self) {
-        [self loadJSON:dictionary];
-    }
-    return self;
++ (instancetype)objectWithJSON:(NSDictionary *)json {
+    return [[UOObjectManager sharedManager] objectWithClass:self.class forJSON:json];
+}
+
++ (instancetype)objectWithID:(UOID)ID {
+    return [[UOObjectManager sharedManager] objectWithClass:self.class forID:ID];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
@@ -84,8 +84,8 @@ void setValueForKey(UOObject *self, SEL _cmd, id value) {
         Class class = NSClassFromString(returnType);
         // TODO Handle array, dictionary, set, etc.
         if ([class isSubclassOfClass:UOObject.class]) {
-            // TODO Initialize class using object manager.
-            self.objectAttributes[key] = [(UOObject*)class initWithDictionary:json[key]];
+            UOObject *object = [[UOObjectManager sharedManager] objectWithClass:class forJSON:json[key]];
+            self.objectAttributes[key] = object;
         } else {
             self.objectAttributes[key] = json[key];
         }
@@ -108,6 +108,19 @@ void setValueForKey(UOObject *self, SEL _cmd, id value) {
     }
     
     return [NSDictionary dictionaryWithDictionary:json];
+}
+
+@end
+
+
+@implementation UOObject (Protected)
+
+- (instancetype)initWithID:(UOID)ID {
+    self = [super init];
+    if (self) {
+        self.objectAttributes[UOObjectIDKey] = ID;
+    }
+    return self;
 }
 
 @end

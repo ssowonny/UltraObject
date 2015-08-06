@@ -13,7 +13,7 @@
 
 SpecBegin(InitialSpecs)
 
-describe(@"Initializing UOTestObject", ^{
+describe(@"UOTestObject", ^{
     it(@"should create test object", ^{
         expect([UOTestObject new]).toNot.beNil;
     });
@@ -25,9 +25,17 @@ describe(@"Initializing UOTestObject", ^{
     it(@"should create mutable object", ^{
         expect([[UOTestObject new] mutableCopy]).to.beInstanceOf(UOMutableTestObject.class);
     });
+    
+    it(@"should share memory only for same identifier", ^{
+        UOTestObject *testObject = [UOTestObject objectWithID:@1];
+        UOTestObject *sameObject = [UOTestObject objectWithID:@1];
+        UOTestObject *otherObject = [UOTestObject objectWithID:@2];
+        expect(testObject).to.equal(sameObject);
+        expect(testObject).toNot.equal(otherObject);
+    });
 });
 
-describe(@"Initializing UOMutableTestObject", ^{
+describe(@"UOMutableTestObject", ^{
     it(@"should create mutable object", ^{
         expect([UOMutableTestObject new]).toNot.beNil;
     });
@@ -41,7 +49,7 @@ describe(@"Initializing UOMutableTestObject", ^{
     });
 });
 
-describe(@"Initializing UOObjectManager", ^{
+describe(@"UOObjectManager", ^{
     it(@"should create object manager", ^{
         expect([UOObjectManager new]).toNot.beNil;
     });

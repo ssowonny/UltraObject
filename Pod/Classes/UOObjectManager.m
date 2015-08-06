@@ -12,8 +12,14 @@
 
 static UOObjectManager *__sharedManager;
 
+@interface UOObject (UOObjectManager)
+- (instancetype)initWithID:(UOID)ID;
+@property (nonatomic, strong) NSMutableDictionary *objectAttributes;
+@end
+
 @interface UOObjectManager () {
     NSDictionary *_mutableClasses;
+    NSMutableDictionary *_classObjects;
 }
 @end
 
@@ -26,10 +32,11 @@ static UOObjectManager *__sharedManager;
     return __sharedManager;
 }
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         [self initMutableClasses];
+        _classObjects = [NSMutableDictionary new];
     }
     return self;
 }
@@ -38,17 +45,41 @@ static UOObjectManager *__sharedManager;
     return _mutableClasses[NSStringFromClass(klass)];
 }
 
+- (id)objectWithClass:(Class)klass forID:(UOID)ID {
+    NSString *classKey = NSStringFromClass(klass);
+    NSMutableDictionary *objects = _classObjects[classKey];
+    if (!objects) {
+        objects = [NSMutableDictionary new];
+        _classObjects[classKey] = objects;
+    }
+    
+    UOObject *object = objects[ID];
+    if (!object) {
+        object = [[klass alloc] initWithID:ID];
+        objects[ID] = object;
+    }
+    
+    return object;
+}
+
+- (id)objectWithClass:(Class)klass forJSON:(NSDictionary *)json {
+    UOID ID = json[UOObjectIDKey];
+    UOObject *object = [self objectWithClass:klass forID:ID];
+    [object loadJSON:json];
+    return object;
+}
+
 #pragma mark - Private
 
 - (void)initMutableClasses {
     NSMutableDictionary *mutableClasses = [NSMutableDictionary new];
     
     Class* classes = NULL;
-    int numClasses = objc_getClassList(NULL, 0);
-    if (numClasses > 0 ) {
-        classes = (Class *)malloc(sizeof(Class) * numClasses);
-        numClasses = objc_getClassList(classes, numClasses);
-        for (int index = 0; index < numClasses; index++) {
+    int classesCount = objc_getClassList(NULL, 0);
+    if (classesCount > 0 ) {
+        classes = (Class *)malloc(sizeof(Class) * classesCount);
+        classesCount = objc_getClassList(classes, classesCount);
+        for (int index = 0; index < classesCount; index++) {
             Class class = classes[index];
             if (class_conformsToProtocol(class, @protocol(UOMutableObject))) {
                 Class superClass = class_getSuperclass(class);
@@ -63,3 +94,5 @@ static UOObjectManager *__sharedManager;
 }
 
 @end
+
+
