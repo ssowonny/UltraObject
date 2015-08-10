@@ -9,6 +9,7 @@
 #import "UOObjectManager.h"
 #import <objc/runtime.h>
 #import "UOMutableObject.h"
+#import "UOObject+Protected.h"
 
 static UOObjectManager *__sharedManager;
 
@@ -64,8 +65,8 @@ static UOObjectManager *__sharedManager;
 
 - (id)objectWithClass:(Class)klass forJSON:(NSDictionary *)json {
     UOID ID = json[UOObjectIDKey];
-    UOObject *object = [self objectWithClass:klass forID:ID];
-    [object mergeFromDictionary:json useKeyMapping:YES];
+    UOObject* object = [self objectWithClass:klass forID:ID];
+    [object importDictionary:json];
     return object;
 }
 

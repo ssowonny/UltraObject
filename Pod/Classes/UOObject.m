@@ -12,6 +12,7 @@
 #import "UOObjectManager.h"
 #import "UOMutableObject.h"
 #import "UOObject+Protected.h"
+#import "UOObject+JSONModel.h"
 
 @interface UOObject () {
     Class _mutableClass;
@@ -47,7 +48,6 @@
 
 @end
 
-
 @implementation UOObject (Protected)
 
 - (instancetype)initWithID:(UOID)ID {
@@ -56,6 +56,10 @@
         self.id = ID;
     }
     return self;
+}
+
+- (BOOL)importDictionary:(NSDictionary*)dict {
+    return [self __importDictionary:dict withKeyMapper:self.__keyMapper validation:NO error:nil];
 }
 
 @end

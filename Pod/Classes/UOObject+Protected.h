@@ -10,4 +10,5 @@
 
 @interface UOObject (Protected)
 - (instancetype)initWithID:(UOID)ID;
+- (BOOL)importDictionary:(NSDictionary*)dict;
 @end
