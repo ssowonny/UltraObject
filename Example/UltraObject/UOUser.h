@@ -13,5 +13,5 @@
 @end
 
 @interface UOMutableUser : UOUser<UOMutableObject>
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, readwrite) NSString *name;
 @end

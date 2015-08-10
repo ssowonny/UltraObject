@@ -40,7 +40,7 @@
 - (instancetype)mutableCopyWithZone:(NSZone *)zone {
     Class mutableClass = [[UOObjectManager sharedManager] mutableClassWithClass:self.class];
     UOObject *mutableObject = [[mutableClass allocWithZone:zone] init];
-    mutableObject.id = self.id;
+    [mutableObject importDictionary:[self toDictionary]];
     return mutableObject;
 }
 

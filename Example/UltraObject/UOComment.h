@@ -18,5 +18,5 @@
 @end
 
 @interface UOMutableComment : UOComment<UOMutableObject>
-@property (nonatomic, strong) NSString *content;
+@property (nonatomic, readwrite) NSString *content;
 @end

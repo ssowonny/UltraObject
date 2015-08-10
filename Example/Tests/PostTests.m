@@ -13,7 +13,9 @@
 SpecBegin(UOPost)
 
 describe(@"UOPost", ^{
-    it(@"should parse json", ^{
+    __block UOPost *post = nil;
+    
+    beforeAll(^{
         NSDictionary *postJSON = @{
                                    @"id": @1,
                                    @"content": @"Hello World",
@@ -24,13 +26,20 @@ describe(@"UOPost", ^{
                                                       @"user": @{@"id": @2, @"name": @"Jane Roe"}
                                                       }]
                                    };
-        UOPost *post = [UOPost objectWithJSON:postJSON];
-        
+        post = [UOPost objectWithJSON:postJSON];
+    });
+    
+    it(@"should parse json", ^{
         expect(post.user.name).to.equal(@"John Doe");
         expect(post.comments.count).to.equal(1);
         
         UOComment *comment = post.comments.firstObject;
         expect(comment.content).to.equal(@"Hi There");
+    });
+    
+    it(@"should create mutable post", ^{
+        UOMutablePost *mutablePost = [post mutableCopy];
+        expect(mutablePost.content).to.equal(post.content);
     });
 });
 

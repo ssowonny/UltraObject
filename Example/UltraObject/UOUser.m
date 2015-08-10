@@ -16,5 +16,5 @@
 @end
 
 @implementation UOMutableUser
-@synthesize name;
+@dynamic name;
 @end

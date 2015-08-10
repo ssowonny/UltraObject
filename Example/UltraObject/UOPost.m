@@ -18,5 +18,5 @@
 @end
 
 @implementation UOMutablePost
-@synthesize content;
+@dynamic content;
 @end

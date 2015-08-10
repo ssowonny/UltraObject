@@ -17,5 +17,5 @@
 @end
 
 @implementation UOMutableComment
-@synthesize content;
+@dynamic content;
 @end

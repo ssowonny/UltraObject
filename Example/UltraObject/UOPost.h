@@ -18,5 +18,5 @@
 @end
 
 @interface UOMutablePost : UOPost<UOMutableObject>
-@property (nonatomic, strong) NSString *content;
+@property (nonatomic, readwrite) NSString *content;
 @end
