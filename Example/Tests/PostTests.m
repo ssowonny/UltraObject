@@ -40,6 +40,7 @@ describe(@"UOPost", ^{
     it(@"should create mutable post", ^{
         UOMutablePost *mutablePost = [post mutableCopy];
         expect(mutablePost.content).to.equal(post.content);
+        expect(mutablePost.user).to.equal(post.user);
     });
 });
 

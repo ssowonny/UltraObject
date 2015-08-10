@@ -31,9 +31,18 @@
     return [[UOObjectManager sharedManager] objectWithClass:self.class forID:ID];
 }
 
+- (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err {
+    UOID ID = dict[UOObjectIDKey];
+    UOObject *object = [[UOObjectManager sharedManager] objectWithClass:self.class forID:ID];
+    if (object != self) {
+        return [object initWithDictionary:dict error:err];
+    }
+    return [super initWithDictionary:dict error:err];
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     UOObject *object = [[self.class allocWithZone:zone] init];
-    object.id = self.id;
+    [object importDictionary:[self toDictionary]];
     return object;
 }
 
