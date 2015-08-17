@@ -16,9 +16,9 @@ typedef void (^UOObservingBlock)(UOObject *);
 + (UOEventCenter *)eventCenter;
 
 - (void)addObservingBlock:(UOObservingBlock)observingBlock forClass:(Class)klass withTarget:(id)target;
-- (void)removeObservingBlock:(UOObservingBlock)observingBlock forClass:(Class)klass withTarget:(id)target;
-
 - (void)addObservingBlock:(UOObservingBlock)observingBlock forObject:(UOObject *)object withTarget:(id)target;
+
+- (void)removeObservingBlock:(UOObservingBlock)observingBlock forClass:(Class)klass withTarget:(id)target;
 - (void)removeObservingBlock:(UOObservingBlock)observingBlock forObject:(UOObject *)object withTarget:(id)target;
 
 - (void)postEventForObject:(UOObject *)object;

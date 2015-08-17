@@ -10,39 +10,10 @@
 #import "UOObject.h"
 #import "UOObject+Protected.h"
 #import <objc/runtime.h>
+#import "UOEventObserver.h"
 
+const char UOEventObserversKey;
 static UOEventCenter *__eventCenter;
-
-@interface UOEventObserver : NSObject
-@property (nonatomic, readonly) NSString *key;
-@property (nonatomic, strong) UOObservingBlock observingBlock;
-@property (nonatomic, weak) UOObject *object;
-
-+ (NSString *)keyForObservingBlock:(UOObservingBlock)observingBlock;
-- (void)onEvent:(NSNotification *)event;
-@end
-
-@implementation UOEventObserver
-
-+ (NSString *)keyForObservingBlock:(UOObservingBlock)observingBlock {
-    return [NSString stringWithFormat:@"UOEventObserver#%@", observingBlock];
-}
-
-- (void)dealloc {
-    [[UOEventCenter eventCenter] removeObserver:self];
-}
-
-- (void)onEvent:(NSNotification *)event {
-    if (_observingBlock && (!self.object || [event.object isEqual:self.object])) {
-        _observingBlock(event.object);
-    }
-}
-
-- (NSString *)key {
-    return [self.class keyForObservingBlock:_observingBlock];
-}
-
-@end
 
 @implementation UOEventCenter
 
@@ -60,14 +31,6 @@ static UOEventCenter *__eventCenter;
     [self addEventObserver:eventObserver forClass:klass withTarget:target];
 }
 
-- (void)removeObservingBlock:(UOObservingBlock)observingBlock forClass:(Class)klass withTarget:(id)target {
-    NSString *key = [UOEventObserver keyForObservingBlock:observingBlock];
-    UOEventObserver *eventObserver = objc_getAssociatedObject(target, key.UTF8String);
-    [self removeObserver:eventObserver name:NSStringFromClass(klass) object:nil];
-    
-    objc_removeAssociatedObjects(eventObserver);
-}
-
 - (void)addObservingBlock:(UOObservingBlock)observingBlock forObject:(UOObject *)object withTarget:(id)target {
     UOEventObserver *eventObserver = [UOEventObserver new];
     eventObserver.observingBlock = observingBlock;
@@ -75,8 +38,14 @@ static UOEventCenter *__eventCenter;
     [self addEventObserver:eventObserver forClass:object.UOClass withTarget:target];
 }
 
+- (void)removeObservingBlock:(UOObservingBlock)observingBlock forClass:(Class)klass withTarget:(id)target {
+    NSString *key = [UOEventObserver keyForObservingBlock:observingBlock withObject:nil];
+    [self removeEventObserverForKey:key forClass:klass withTarget:target];
+}
+
 - (void)removeObservingBlock:(UOObservingBlock)observingBlock forObject:(UOObject *)object withTarget:(id)target {
-    [self removeObservingBlock:observingBlock forClass:object.UOClass withTarget:target];
+    NSString *key = [UOEventObserver keyForObservingBlock:observingBlock withObject:object];
+    [self removeEventObserverForKey:key forClass:object.UOClass withTarget:target];
 }
 
 - (void)postEventForObject:(UOObject *)object {
@@ -87,7 +56,27 @@ static UOEventCenter *__eventCenter;
 
 - (void)addEventObserver:(UOEventObserver *)eventObserver forClass:(Class)klass withTarget:(id)target {
     [self addObserver:eventObserver selector:@selector(onEvent:) name:NSStringFromClass(klass) object:nil];
-    objc_setAssociatedObject(target, eventObserver.key.UTF8String, eventObserver, OBJC_ASSOCIATION_RETAIN);
+    
+    NSMutableDictionary *eventObservers = [self eventObserversForTarget:target];
+    [eventObservers setObject:eventObserver forKey:eventObserver.key];
+}
+
+- (void)removeEventObserverForKey:(NSString *)key forClass:(Class)klass withTarget:(id)target {
+    NSMutableDictionary *eventObservers = [self eventObserversForTarget:target];
+    UOEventObserver *eventObserver = eventObservers[key];
+    [self removeObserver:eventObserver name:NSStringFromClass(klass) object:nil];
+    
+    [eventObservers removeObjectForKey:key];
+}
+
+- (NSMutableDictionary *)eventObserversForTarget:(id)target {
+    NSMutableDictionary *eventObservers = objc_getAssociatedObject(target, &UOEventObserversKey);
+    if (!eventObservers) {
+        eventObservers = [NSMutableDictionary new];
+        objc_setAssociatedObject(target, &UOEventObserversKey, eventObservers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    
+    return eventObservers;
 }
 
 @end
