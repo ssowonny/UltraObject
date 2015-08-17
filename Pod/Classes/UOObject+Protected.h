@@ -9,7 +9,9 @@
 #import "UOObject.h"
 
 @interface UOObject (Protected)
++ (Class)UOClass;
+
+- (Class)UOClass;
 - (instancetype)initWithID:(UOID)ID;
 - (BOOL)importDictionary:(NSDictionary*)dict;
-- (Class)UOClass;
 @end
