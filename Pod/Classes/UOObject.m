@@ -6,17 +6,15 @@
 //
 //
 
-#import <objc/runtime.h>
 #import "UOObject.h"
 #import "NSString+Conversion.h"
 #import "UOObjectManager.h"
 #import "UOMutableObject.h"
 #import "UOObject+Protected.h"
 #import "UOObject+JSONModel.h"
+#import "UOMutableObject.h"
 
-@interface UOObject () {
-    Class _mutableClass;
-}
+@interface UOObject ()
 @property (nonatomic, strong) UOID id;
 @end
 
@@ -33,10 +31,15 @@
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err {
     UOID ID = dict[UOObjectIDKey];
+    if (!ID) {
+        return [super initWithDictionary:dict error:err];
+    }
+    
     UOObject *object = [[UOObjectManager sharedManager] objectWithClass:self.class forID:ID];
     if (object != self) {
         return [object initWithDictionary:dict error:err];
     }
+    
     return [super initWithDictionary:dict error:err];
 }
 
@@ -53,6 +56,14 @@
     return mutableObject;
 }
 
+- (void)addObservingBlock:(UOObservingBlock)observingBlock withTarget:(id)target {
+    [[UOEventCenter eventCenter] addObservingBlock:observingBlock forObject:self withTarget:target];
+}
+
+- (void)removeObservingBlock:(UOObservingBlock)observingBlock withTarget:(id)target {
+    [[UOEventCenter eventCenter] removeObservingBlock:observingBlock forObject:self withTarget:target];
+}
+
 #pragma mark - Private methods
 
 @end
@@ -65,6 +76,11 @@
         self.id = ID;
     }
     return self;
+}
+
+- (Class)UOClass {
+    return [self.class conformsToProtocol:@protocol(UOMutableObject)]
+        ? self.superclass : self.class;
 }
 
 - (BOOL)importDictionary:(NSDictionary*)dict {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A6CEFE31B70639D007B5A78 /* UOTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6CEFE21B70639D007B5A78 /* UOTestObject.m */; };
+		1A9F29571B8189F6008D123A /* EventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F29551B8189EC008D123A /* EventTests.m */; };
 		1AB961521B73579500C970C7 /* PostTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D2A1B73566700DB7DBD /* PostTests.m */; };
 		1AE30D221B7353B700DB7DBD /* UOPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D211B7353B700DB7DBD /* UOPost.m */; };
 		1AE30D251B7353C100DB7DBD /* UOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D241B7353C100DB7DBD /* UOUser.m */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		1A6CEFE11B70639D007B5A78 /* UOTestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOTestObject.h; sourceTree = "<group>"; };
 		1A6CEFE21B70639D007B5A78 /* UOTestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOTestObject.m; sourceTree = "<group>"; };
+		1A9F29551B8189EC008D123A /* EventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTests.m; sourceTree = "<group>"; };
 		1AE30D201B7353B700DB7DBD /* UOPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOPost.h; sourceTree = "<group>"; };
 		1AE30D211B7353B700DB7DBD /* UOPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOPost.m; sourceTree = "<group>"; };
 		1AE30D231B7353C100DB7DBD /* UOUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOUser.h; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				6003F5BB195388D20070C39A /* Tests.m */,
 				1AE30D2A1B73566700DB7DBD /* PostTests.m */,
+				1A9F29551B8189EC008D123A /* EventTests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -428,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AB961521B73579500C970C7 /* PostTests.m in Sources */,
+				1A9F29571B8189F6008D123A /* EventTests.m in Sources */,
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
