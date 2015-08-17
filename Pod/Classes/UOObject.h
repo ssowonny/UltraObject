@@ -23,7 +23,13 @@ typedef id<NSCoding, NSCopying> UOID;
 + (void)addObservingTarget:(id)target block:(UOObservingBlock)block;
 + (void)removeObservingTarget:(id)target block:(UOObservingBlock)block;
 
++ (void)addObservingTarget:(id)target action:(SEL)action;
++ (void)removeObservingTarget:(id)target action:(SEL)action;
+
 - (void)addObservingTarget:(id)target block:(UOObservingBlock)block;
 - (void)removeObservingTarget:(id)target block:(UOObservingBlock)block;
+
+- (void)addObservingTarget:(id)target action:(SEL)action;
+- (void)removeObservingTarget:(id)target action:(SEL)action;
 
 @end

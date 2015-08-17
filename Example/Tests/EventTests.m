@@ -11,6 +11,17 @@
 #import "UOComment.h"
 #import "UOEventCenter.h"
 
+@interface UOTargetWithAction : NSObject
+@property (nonatomic, assign) int callCount;
+- (void)onEvent:(UOObject *)object;
+@end
+
+@implementation UOTargetWithAction
+- (void)onEvent:(UOObject *)object {
+    ++ _callCount;
+}
+@end
+
 SpecBegin(UOEventCenter)
 
 describe(@"UOEventCenter", ^{
@@ -28,7 +39,6 @@ describe(@"UOEventCenter", ^{
     it(@"should remove deallocated observing blocks", ^{
         UOPost *post = [UOPost objectWithID:@1];
         NSObject *observer = [NSObject new];
-        
         __block BOOL observingBlockPerformed = NO;
         [post addObservingTarget:self block:^(UOObject *object) {
             observingBlockPerformed = YES;
@@ -85,7 +95,7 @@ describe(@"UOEventCenter", ^{
         expect(callCount).to.equal(1);
     });
     
-    context(@"when observing class events", ^{
+    describe(@"with class event observers", ^{
         __block int classEventCallCount;
         __block id target;
         
@@ -109,6 +119,26 @@ describe(@"UOEventCenter", ^{
             UOPost *post = [UOPost objectWithID:@1];
             [[UOEventCenter eventCenter] postEventForObject:post];
             expect(classEventCallCount).to.equal(0);
+        });
+    });
+    
+    describe(@"with action selector", ^{
+        it(@"should call action selector", ^{
+            UOPost *post = [UOPost objectWithID:@1];
+            UOTargetWithAction *target = [UOTargetWithAction new];
+            [post addObservingTarget:target action:@selector(onEvent:)];
+            
+            [[UOEventCenter eventCenter] postEventForObject:post];
+            expect(target.callCount).to.equal(1);
+        });
+        
+        it(@"should call action selector for class events", ^{
+            UOTargetWithAction *target = [UOTargetWithAction new];
+            [UOPost addObservingTarget:target action:@selector(onEvent:)];
+            
+            UOPost *post = [UOPost objectWithID:@1];
+            [[UOEventCenter eventCenter] postEventForObject:post];
+            expect(target.callCount).to.equal(1);
         });
     });
 });
