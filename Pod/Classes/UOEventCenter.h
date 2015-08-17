@@ -8,18 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class UOObject;
+@class UOObject, UOEventObserver;
 typedef void (^UOObservingBlock)(UOObject *);
 
 @interface UOEventCenter : NSNotificationCenter
 
 + (UOEventCenter *)eventCenter;
 
-- (void)addObservingBlock:(UOObservingBlock)observingBlock forClass:(Class)klass withTarget:(id)target;
-- (void)addObservingBlock:(UOObservingBlock)observingBlock forObject:(UOObject *)object withTarget:(id)target;
+- (void)addObservingTarget:(id)target block:(UOObservingBlock)observingBlock class:(Class)klass;
+- (void)addObservingTarget:(id)target block:(UOObservingBlock)observingBlock object:(UOObject *)object;
 
-- (void)removeObservingBlock:(UOObservingBlock)observingBlock forClass:(Class)klass withTarget:(id)target;
-- (void)removeObservingBlock:(UOObservingBlock)observingBlock forObject:(UOObject *)object withTarget:(id)target;
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)observingBlock;
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)observingBlock object:(UOObject *)object;
 
 - (void)postEventForObject:(UOObject *)object;
 

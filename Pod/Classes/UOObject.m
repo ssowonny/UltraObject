@@ -29,6 +29,14 @@
     return [[UOObjectManager sharedManager] objectWithClass:self.UOClass forID:ID];
 }
 
++ (void)addObservingTarget:(id)target block:(UOObservingBlock)block {
+    [[UOEventCenter eventCenter] addObservingTarget:target block:block class:self.UOClass];
+}
+
++ (void)removeObservingTarget:(id)target block:(UOObservingBlock)block {
+    [[UOEventCenter eventCenter] removeObservingTarget:target block:block];
+}
+
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err {
     UOID ID = dict[UOObjectIDKey];
     if (!ID) {
@@ -56,12 +64,12 @@
     return mutableObject;
 }
 
-- (void)addObservingBlock:(UOObservingBlock)observingBlock withTarget:(id)target {
-    [[UOEventCenter eventCenter] addObservingBlock:observingBlock forObject:self withTarget:target];
+- (void)addObservingTarget:(id)target block:(UOObservingBlock)block {
+    [[UOEventCenter eventCenter] addObservingTarget:target block:block object:self];
 }
 
-- (void)removeObservingBlock:(UOObservingBlock)observingBlock withTarget:(id)target {
-    [[UOEventCenter eventCenter] removeObservingBlock:observingBlock forObject:self withTarget:target];
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)block {
+    [[UOEventCenter eventCenter] removeObservingTarget:target block:block object:self];
 }
 
 #pragma mark - Private methods

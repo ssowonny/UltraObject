@@ -20,7 +20,10 @@ typedef id<NSCoding, NSCopying> UOID;
 + (instancetype)objectWithID:(UOID)ID;
 + (instancetype)objectWithJSON:(NSDictionary *)json;
 
-- (void)addObservingBlock:(UOObservingBlock)observingBlock withTarget:(id)target;
-- (void)removeObservingBlock:(UOObservingBlock)observingBlock withTarget:(id)target;
++ (void)addObservingTarget:(id)target block:(UOObservingBlock)block;
++ (void)removeObservingTarget:(id)target block:(UOObservingBlock)block;
+
+- (void)addObservingTarget:(id)target block:(UOObservingBlock)block;
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)block;
 
 @end

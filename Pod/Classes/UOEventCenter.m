@@ -25,27 +25,24 @@ static UOEventCenter *__eventCenter;
     return __eventCenter;
 }
 
-- (void)addObservingBlock:(UOObservingBlock)observingBlock forClass:(Class)klass withTarget:(id)target {
-    UOEventObserver *eventObserver = [UOEventObserver new];
-    eventObserver.observingBlock = observingBlock;
-    [self addEventObserver:eventObserver forClass:klass withTarget:target];
+- (void)addObservingTarget:(id)target block:(UOObservingBlock)block class:(Class)klass {
+    UOEventObserver *eventObserver = [[UOEventObserver alloc] initWithTarget:target observingBlock:block class:klass];
+    [self addEventObserver:eventObserver];
 }
 
-- (void)addObservingBlock:(UOObservingBlock)observingBlock forObject:(UOObject *)object withTarget:(id)target {
-    UOEventObserver *eventObserver = [UOEventObserver new];
-    eventObserver.observingBlock = observingBlock;
-    eventObserver.object = object;
-    [self addEventObserver:eventObserver forClass:object.UOClass withTarget:target];
+- (void)addObservingTarget:(id)target block:(UOObservingBlock)block object:(UOObject *)object {
+    UOEventObserver *eventObserver = [[UOEventObserver alloc] initWithTarget:target observingBlock:block object:object];
+    [self addEventObserver:eventObserver];
 }
 
-- (void)removeObservingBlock:(UOObservingBlock)observingBlock forClass:(Class)klass withTarget:(id)target {
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)observingBlock {
     NSString *key = [UOEventObserver keyForObservingBlock:observingBlock withObject:nil];
-    [self removeEventObserverForKey:key forClass:klass withTarget:target];
+    [self removeEventObserverForKey:key target:target];
 }
 
-- (void)removeObservingBlock:(UOObservingBlock)observingBlock forObject:(UOObject *)object withTarget:(id)target {
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)observingBlock object:(UOObject *)object {
     NSString *key = [UOEventObserver keyForObservingBlock:observingBlock withObject:object];
-    [self removeEventObserverForKey:key forClass:object.UOClass withTarget:target];
+    [self removeEventObserverForKey:key target:target];
 }
 
 - (void)postEventForObject:(UOObject *)object {
@@ -54,17 +51,17 @@ static UOEventCenter *__eventCenter;
 
 #pragma mark - Private
 
-- (void)addEventObserver:(UOEventObserver *)eventObserver forClass:(Class)klass withTarget:(id)target {
-    [self addObserver:eventObserver selector:@selector(onEvent:) name:NSStringFromClass(klass) object:nil];
+- (void)addEventObserver:(UOEventObserver *)eventObserver {
+    [self addObserver:eventObserver selector:@selector(onEvent:) name:NSStringFromClass(eventObserver.klass) object:nil];
     
-    NSMutableDictionary *eventObservers = [self eventObserversForTarget:target];
+    NSMutableDictionary *eventObservers = [self eventObserversForTarget:eventObserver.target];
     [eventObservers setObject:eventObserver forKey:eventObserver.key];
 }
 
-- (void)removeEventObserverForKey:(NSString *)key forClass:(Class)klass withTarget:(id)target {
+- (void)removeEventObserverForKey:(NSString *)key target:(id)target {
     NSMutableDictionary *eventObservers = [self eventObserversForTarget:target];
     UOEventObserver *eventObserver = eventObservers[key];
-    [self removeObserver:eventObserver name:NSStringFromClass(klass) object:nil];
+    [self removeObserver:eventObserver name:NSStringFromClass(eventObserver.klass) object:nil];
     
     [eventObservers removeObjectForKey:key];
 }

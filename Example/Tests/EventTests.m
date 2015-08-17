@@ -17,9 +17,9 @@ describe(@"UOEventCenter", ^{
     it(@"should perform observing block", ^{
         UOPost *post = [UOPost objectWithID:@1];
         __block BOOL observingBlockPerformed = NO;
-        [post addObservingBlock:^(UOObject *object) {
+        [post addObservingTarget:self block:^(UOObject *object) {
             observingBlockPerformed = YES;
-        } withTarget:self];
+        }];
         
         [[UOEventCenter eventCenter] postEventForObject:post];
         expect(observingBlockPerformed).to.beTruthy;
@@ -30,9 +30,9 @@ describe(@"UOEventCenter", ^{
         NSObject *observer = [NSObject new];
         
         __block BOOL observingBlockPerformed = NO;
-        [post addObservingBlock:^(UOObject *object) {
+        [post addObservingTarget:self block:^(UOObject *object) {
             observingBlockPerformed = YES;
-        } withTarget:observer];
+        }];
         
         observer = nil;
         [[UOEventCenter eventCenter] postEventForObject:post];
@@ -44,9 +44,9 @@ describe(@"UOEventCenter", ^{
         UOPost *otherPost = [UOPost objectWithID:@2];
         
         __block BOOL observingBlockPerformed = NO;
-        [post addObservingBlock:^(UOObject *object) {
+        [post addObservingTarget:self block:^(UOObject *object) {
             observingBlockPerformed = YES;
-        } withTarget:self];
+        }];
         
         [[UOEventCenter eventCenter] postEventForObject:otherPost];
         expect(observingBlockPerformed).to.beFalsy;
@@ -60,8 +60,8 @@ describe(@"UOEventCenter", ^{
         
         UOPost *post = [UOPost objectWithID:@1];
         UOPost *otherPost = [UOPost objectWithID:@2];
-        [post addObservingBlock:observingBlock withTarget:self];
-        [otherPost addObservingBlock:observingBlock withTarget:self];
+        [post addObservingTarget:self block:observingBlock];
+        [otherPost addObservingTarget:self block:observingBlock];
         
         [[UOEventCenter eventCenter] postEventForObject:post];
         [[UOEventCenter eventCenter] postEventForObject:otherPost];
@@ -76,13 +76,40 @@ describe(@"UOEventCenter", ^{
         
         UOPost *post = [UOPost objectWithID:@1];
         UOPost *otherPost = [UOPost objectWithID:@2];
-        [post addObservingBlock:observingBlock withTarget:self];
-        [otherPost addObservingBlock:observingBlock withTarget:self];
-        [post removeObservingBlock:observingBlock withTarget:self];
+        [post addObservingTarget:self block:observingBlock];
+        [otherPost addObservingTarget:self block:observingBlock];
+        [post removeObservingTarget:self block:observingBlock];
         
         [[UOEventCenter eventCenter] postEventForObject:post];
         [[UOEventCenter eventCenter] postEventForObject:otherPost];
         expect(callCount).to.equal(1);
+    });
+    
+    context(@"when observing class events", ^{
+        __block int classEventCallCount;
+        __block id target;
+        
+        beforeEach(^{
+            classEventCallCount = 0;
+            target = [NSObject new];
+            
+            [UOPost addObservingTarget:target block:^(UOObject *object){
+                ++ classEventCallCount;
+            }];
+        });
+        
+        it(@"should call class event observing block", ^{
+            UOPost *post = [UOPost objectWithID:@1];
+            [[UOEventCenter eventCenter] postEventForObject:post];
+            expect(classEventCallCount).to.equal(1);
+        });
+        
+        it(@"should remove deallocated observing blocks", ^{
+            target = nil;
+            UOPost *post = [UOPost objectWithID:@1];
+            [[UOEventCenter eventCenter] postEventForObject:post];
+            expect(classEventCallCount).to.equal(0);
+        });
     });
 });
 

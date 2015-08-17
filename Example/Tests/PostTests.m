@@ -15,7 +15,7 @@ SpecBegin(UOPost)
 describe(@"UOPost", ^{
     __block UOPost *post = nil;
     
-    beforeAll(^{
+    beforeEach(^{
         NSDictionary *postJSON = @{
                                    @"id": @1,
                                    @"content": @"Hello World",
