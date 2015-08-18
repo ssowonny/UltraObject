@@ -33,23 +33,26 @@ describe(@"UOEventCenter", ^{
     it(@"should perform observing block", ^{
         UOPost *post = [UOPost objectWithID:@1];
         __block BOOL observingBlockPerformed = NO;
-        [post addObservingTarget:target block:^(UOObject *object) {
+        __weak UOPost *weakPost = post;
+        [post addObservingTarget:target block:^(UOEvent *event) {
             observingBlockPerformed = YES;
+            expect(event.type).to.equal(UOEventTypeUpdate);
+            expect(event.object).to.equal(weakPost);
         }];
         
-        [[UOEventCenter eventCenter] postEventForObject:post];
+        [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
         expect(observingBlockPerformed).to.beTruthy;
     });
     
     it(@"should remove deallocated observing blocks", ^{
         UOPost *post = [UOPost objectWithID:@1];
         __block BOOL observingBlockPerformed = NO;
-        [post addObservingTarget:target block:^(UOObject *object) {
+        [post addObservingTarget:target block:^(UOEvent *event) {
             observingBlockPerformed = YES;
         }];
         
         target = nil;
-        [[UOEventCenter eventCenter] postEventForObject:post];
+        [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
         expect(observingBlockPerformed).to.beFalsy;
     });
     
@@ -58,17 +61,17 @@ describe(@"UOEventCenter", ^{
         UOPost *otherPost = [UOPost objectWithID:@2];
         
         __block BOOL observingBlockPerformed = NO;
-        [post addObservingTarget:target block:^(UOObject *object) {
+        [post addObservingTarget:target block:^(UOEvent *event) {
             observingBlockPerformed = YES;
         }];
         
-        [[UOEventCenter eventCenter] postEventForObject:otherPost];
+        [[UOEventCenter eventCenter] postEventForObject:otherPost type:UOEventTypeUpdate];
         expect(observingBlockPerformed).to.beFalsy;
     });
     
     it(@"should reuse observing blocks", ^{
         __block int callCount = 0;
-        UOObservingBlock observingBlock = ^(UOObject *object) {
+        UOObservingBlock observingBlock = ^(UOEvent *event) {
             ++ callCount;
         };
         
@@ -77,14 +80,14 @@ describe(@"UOEventCenter", ^{
         [post addObservingTarget:target block:observingBlock];
         [otherPost addObservingTarget:target block:observingBlock];
         
-        [[UOEventCenter eventCenter] postEventForObject:post];
-        [[UOEventCenter eventCenter] postEventForObject:otherPost];
+        [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
+        [[UOEventCenter eventCenter] postEventForObject:otherPost type:UOEventTypeUpdate];
         expect(callCount).to.equal(2);
     });
     
     it(@"should remove proper observing block", ^{
         __block int callCount = 0;
-        UOObservingBlock observingBlock = ^(UOObject *object) {
+        UOObservingBlock observingBlock = ^(UOEvent *event) {
             ++ callCount;
         };
         
@@ -94,8 +97,8 @@ describe(@"UOEventCenter", ^{
         [otherPost addObservingTarget:target block:observingBlock];
         [post removeObservingTarget:target block:observingBlock];
         
-        [[UOEventCenter eventCenter] postEventForObject:post];
-        [[UOEventCenter eventCenter] postEventForObject:otherPost];
+        [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
+        [[UOEventCenter eventCenter] postEventForObject:otherPost type:UOEventTypeUpdate];
         expect(callCount).to.equal(1);
     });
     
@@ -103,7 +106,7 @@ describe(@"UOEventCenter", ^{
         it(@"should perform observing block", ^{
             UOPost *post = [UOPost objectWithID:@1];
             __block BOOL observingBlockPerformed = NO;
-            [post addObservingTarget:target block:^(UOObject *object) {
+            [post addObservingTarget:target block:^(UOEvent *event) {
                 observingBlockPerformed = YES;
             }];
             
@@ -120,21 +123,21 @@ describe(@"UOEventCenter", ^{
         beforeEach(^{
             classEventCallCount = 0;
             
-            [UOPost addObservingTarget:target block:^(UOObject *object){
+            [UOPost addObservingTarget:target block:^(UOEvent *event) {
                 ++ classEventCallCount;
             }];
         });
         
         it(@"should call class event observing block", ^{
             UOPost *post = [UOPost objectWithID:@1];
-            [[UOEventCenter eventCenter] postEventForObject:post];
+            [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
             expect(classEventCallCount).to.equal(1);
         });
         
         it(@"should remove deallocated observing blocks", ^{
             target = nil;
             UOPost *post = [UOPost objectWithID:@1];
-            [[UOEventCenter eventCenter] postEventForObject:post];
+            [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
             expect(classEventCallCount).to.equal(0);
         });
     });
@@ -145,7 +148,7 @@ describe(@"UOEventCenter", ^{
             UOTargetWithAction *target = [UOTargetWithAction new];
             [post addObservingTarget:target action:@selector(onEvent:)];
             
-            [[UOEventCenter eventCenter] postEventForObject:post];
+            [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
             expect(target.callCount).to.equal(1);
         });
         
@@ -154,7 +157,7 @@ describe(@"UOEventCenter", ^{
             [UOPost addObservingTarget:target action:@selector(onEvent:)];
             
             UOPost *post = [UOPost objectWithID:@1];
-            [[UOEventCenter eventCenter] postEventForObject:post];
+            [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
             expect(target.callCount).to.equal(1);
         });
     });

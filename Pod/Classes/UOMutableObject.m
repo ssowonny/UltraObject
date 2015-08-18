@@ -16,7 +16,7 @@
 - (void)synchronize {
     UOObject *object = [[UOObjectManager sharedManager] objectWithClass:self.UOClass forID:self.id];
     [object importDictionary:self.toDictionary];
-    [[UOEventCenter eventCenter] postEventForObject:object];
+    [[UOEventCenter eventCenter] postEventForObject:object type:UOEventTypeUpdate userInfo:nil];
 }
 
 @end

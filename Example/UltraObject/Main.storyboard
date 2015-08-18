@@ -114,7 +114,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="OyH-PI-o0Q">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="6G1-6M-Vcr">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="6G1-6M-Vcr">
                             <connections>
                                 <segue destination="ta6-U7-5wl" kind="show" identifier="EditPost" id="VHH-cJ-STe"/>
                             </connections>
@@ -156,7 +156,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DN7-ok-Haz">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="N5c-16-GY3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="N5c-16-GY3">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="ta6-U7-5wl" id="w8K-6w-R6L"/>
                             </connections>

@@ -23,7 +23,7 @@
         [_post removeObservingTarget:self action:@selector(onPostEvent:)];
     }
     _post = post;
-    [post addObservingTarget:self action:@selector(onPostEvent:)];
+    [_post addObservingTarget:self action:@selector(onPostEvent:)];
 }
 
 - (void)viewDidLoad {
@@ -31,8 +31,10 @@
     [self bindPost];
 }
 
-- (void)onPostEvent:(UOPost *)post {
-    [self bindPost];
+- (void)onPostEvent:(UOEvent *)event {
+    if (event.type == UOEventTypeUpdate) {
+        [self bindPost];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

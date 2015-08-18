@@ -7,24 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UOEvent.h"
 
 @class UOObject;
-typedef void (^UOObservingBlock)(UOObject *);
+typedef void (^UOObservingBlock)(UOEvent *);
 
 @interface UOEventCenter : NSNotificationCenter
 
 + (UOEventCenter *)eventCenter;
 
-- (void)addObservingTarget:(id)target block:(UOObservingBlock)observingBlock class:(Class)klass;
-- (void)addObservingTarget:(id)target block:(UOObservingBlock)observingBlock object:(UOObject *)object;
+- (void)addObservingTarget:(id)target block:(UOObservingBlock)block class:(Class)klass;
+- (void)addObservingTarget:(id)target block:(UOObservingBlock)block object:(UOObject *)object;
 - (void)addObservingTarget:(id)target action:(SEL)action class:(Class)klass;
 - (void)addObservingTarget:(id)target action:(SEL)action object:(UOObject *)object;
 
-- (void)removeObservingTarget:(id)target block:(UOObservingBlock)observingBlock;
-- (void)removeObservingTarget:(id)target block:(UOObservingBlock)observingBlock object:(UOObject *)object;
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)block;
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)block object:(UOObject *)object;
 - (void)removeObservingTarget:(id)target action:(SEL)action;
 - (void)removeObservingTarget:(id)target action:(SEL)action object:(UOObject *)object;
 
-- (void)postEventForObject:(UOObject *)object;
+- (void)postEventForObject:(UOObject *)object type:(UOEventType)type;
+- (void)postEventForObject:(UOObject *)object type:(UOEventType)type userInfo:(NSDictionary *)userInfo;
 
 @end

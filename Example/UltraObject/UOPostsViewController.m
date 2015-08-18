@@ -29,10 +29,17 @@
     [UOPost addObservingTarget:self action:@selector(onPostEvent:)];
 }
 
-- (void)onPostEvent:(UOPost *)post {
-    if ([_posts containsObject:post]) {
-        [self.tableView reloadData];
+- (void)onPostEvent:(UOEvent *)event {
+    UOPost *post = event.object;
+    if (![_posts containsObject:post]) {
+        return;
     }
+    
+    if (event.type == UOEventTypeDelete) {
+        [_posts removeObject:post];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

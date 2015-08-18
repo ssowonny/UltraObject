@@ -27,6 +27,6 @@
 - (instancetype)initWithTarget:(id)target action:(SEL)action object:(UOObject *)object;
 - (instancetype)initWithTarget:(id)target action:(SEL)action class:(Class)klass;
 
-- (void)onEvent:(NSNotification *)event;
+- (void)onEvent:(NSNotification *)notification;
 
 @end

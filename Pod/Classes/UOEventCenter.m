@@ -45,13 +45,13 @@ static UOEventCenter *__eventCenter;
     [self addEventObserver:eventObserver];
 }
 
-- (void)removeObservingTarget:(id)target block:(UOObservingBlock)observingBlock {
-    NSString *key = [UOEventObserver keyForObservingBlock:observingBlock object:nil];
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)block {
+    NSString *key = [UOEventObserver keyForObservingBlock:block object:nil];
     [self removeEventObserverForKey:key target:target];
 }
 
-- (void)removeObservingTarget:(id)target block:(UOObservingBlock)observingBlock object:(UOObject *)object {
-    NSString *key = [UOEventObserver keyForObservingBlock:observingBlock object:object];
+- (void)removeObservingTarget:(id)target block:(UOObservingBlock)block object:(UOObject *)object {
+    NSString *key = [UOEventObserver keyForObservingBlock:block object:object];
     [self removeEventObserverForKey:key target:target];
 }
 
@@ -65,8 +65,17 @@ static UOEventCenter *__eventCenter;
     [self removeEventObserverForKey:key target:target];
 }
 
-- (void)postEventForObject:(UOObject *)object {
-    [self postNotificationName:NSStringFromClass(object.UOClass) object:object];
+- (void)postEventForObject:(UOObject *)object type:(UOEventType)type {
+    [self postEventForObject:object type:type userInfo:nil];
+}
+
+- (void)postEventForObject:(UOObject *)object type:(UOEventType)type userInfo:(NSDictionary *)userInfo {
+    UOEvent *event = [UOEvent new];
+    event.object = object;
+    event.type = type;
+    event.userInfo = userInfo;
+    
+    [self postNotificationName:NSStringFromClass(object.UOClass) object:event];
 }
 
 #pragma mark - Private

@@ -67,17 +67,18 @@
     [[UOEventCenter eventCenter] removeObserver:self];
 }
 
-- (void)onEvent:(NSNotification *)event {
+- (void)onEvent:(NSNotification *)notification {
+    UOEvent *event = notification.object;
     if (self.object && ![event.object isEqual:self.object]) {
         return;
     }
     
     if (_observingBlock) {
-        _observingBlock(event.object);
+        _observingBlock(event);
     } else if (_target && _action) {
         IMP imp = [_target methodForSelector:_action];
-        void (*func)(id, SEL, UOObject *) = (void *)imp;
-        func(_target, _action, event.object);
+        void (*func)(id, SEL, UOEvent *) = (void *)imp;
+        func(_target, _action, event);
     }
 }
 
