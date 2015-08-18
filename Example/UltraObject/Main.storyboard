@@ -116,7 +116,7 @@
                     <navigationItem key="navigationItem" id="OyH-PI-o0Q">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="6G1-6M-Vcr">
                             <connections>
-                                <segue destination="ta6-U7-5wl" kind="show" identifier="EditPost" id="VHH-cJ-STe"/>
+                                <action selector="editButtonPressed:" destination="EHz-8E-mZV" id="YUc-VG-d5X"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

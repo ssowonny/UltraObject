@@ -37,6 +37,20 @@
     }
 }
 
+- (IBAction)editButtonPressed:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Edit Post" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Content" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self editPost];
+    }];
+    UIAlertAction *destroyAction = [UIAlertAction actionWithTitle:@"Remove Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [self destroyPost];
+    }];
+    
+    [alertController addAction:editAction];
+    [alertController addAction:destroyAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"EditPost"]) {
         UOEditViewController *editViewController = segue.destinationViewController;
@@ -49,6 +63,15 @@
 - (void)bindPost {
     _contentLabel.text = _post.content;
     _userNameLabel.text = _post.user.name;
+}
+
+- (void)editPost {
+    [self performSegueWithIdentifier:@"EditPost" sender:self];
+}
+
+- (void)destroyPost {
+    [_post destroy];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

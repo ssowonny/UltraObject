@@ -88,10 +88,22 @@
     [[UOEventCenter eventCenter] removeObservingTarget:target action:action object:self];
 }
 
+- (void)postEventWithType:(UOEventType)type {
+    [[UOEventCenter eventCenter] postEventForObject:self type:type];
+}
+
+- (void)postEventWithType:(UOEventType)type userInfo:(NSDictionary *)userInfo {
+    [[UOEventCenter eventCenter] postEventForObject:self type:type userInfo:userInfo];
+}
+
 - (void)edit:(UOEditBlock)block {
     UOObject<UOMutableObject> *mutableObject = [self mutableCopy];
     block(mutableObject);
     [mutableObject synchronize];
+}
+
+- (void)destroy {
+    [self postEventWithType:UOEventTypeDelete];
 }
 
 #pragma mark - Private methods
