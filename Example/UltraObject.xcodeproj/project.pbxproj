@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1A6CEFE31B70639D007B5A78 /* UOTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6CEFE21B70639D007B5A78 /* UOTestObject.m */; };
 		1A9F29571B8189F6008D123A /* EventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F29551B8189EC008D123A /* EventTests.m */; };
+		1AB62C101B81E8AD007AF618 /* UOPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB62C0F1B81E8AD007AF618 /* UOPostViewController.m */; };
+		1AB62C131B82BDD0007AF618 /* UOPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB62C121B82BDD0007AF618 /* UOPostsViewController.m */; };
 		1AB961521B73579500C970C7 /* PostTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D2A1B73566700DB7DBD /* PostTests.m */; };
 		1AE30D221B7353B700DB7DBD /* UOPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D211B7353B700DB7DBD /* UOPost.m */; };
 		1AE30D251B7353C100DB7DBD /* UOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D241B7353C100DB7DBD /* UOUser.m */; };
@@ -19,7 +21,6 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* UOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* UOAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* UOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* UOViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -45,6 +46,10 @@
 		1A6CEFE11B70639D007B5A78 /* UOTestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOTestObject.h; sourceTree = "<group>"; };
 		1A6CEFE21B70639D007B5A78 /* UOTestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOTestObject.m; sourceTree = "<group>"; };
 		1A9F29551B8189EC008D123A /* EventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTests.m; sourceTree = "<group>"; };
+		1AB62C0E1B81E8AD007AF618 /* UOPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOPostViewController.h; sourceTree = "<group>"; };
+		1AB62C0F1B81E8AD007AF618 /* UOPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOPostViewController.m; sourceTree = "<group>"; };
+		1AB62C111B82BDD0007AF618 /* UOPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOPostsViewController.h; sourceTree = "<group>"; };
+		1AB62C121B82BDD0007AF618 /* UOPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOPostsViewController.m; sourceTree = "<group>"; };
 		1AE30D201B7353B700DB7DBD /* UOPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOPost.h; sourceTree = "<group>"; };
 		1AE30D211B7353B700DB7DBD /* UOPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOPost.m; sourceTree = "<group>"; };
 		1AE30D231B7353C100DB7DBD /* UOUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOUser.h; sourceTree = "<group>"; };
@@ -65,8 +70,6 @@
 		6003F59B195388D20070C39A /* UltraObject-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UltraObject-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* UOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UOAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* UOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UOAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* UOViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UOViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* UOViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UOViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* UltraObject_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UltraObject_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -160,8 +163,10 @@
 				6003F59C195388D20070C39A /* UOAppDelegate.h */,
 				6003F59D195388D20070C39A /* UOAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* UOViewController.h */,
-				6003F5A6195388D20070C39A /* UOViewController.m */,
+				1AB62C111B82BDD0007AF618 /* UOPostsViewController.h */,
+				1AB62C121B82BDD0007AF618 /* UOPostsViewController.m */,
+				1AB62C0E1B81E8AD007AF618 /* UOPostViewController.h */,
+				1AB62C0F1B81E8AD007AF618 /* UOPostViewController.m */,
 				1A6CEFE11B70639D007B5A78 /* UOTestObject.h */,
 				1A6CEFE21B70639D007B5A78 /* UOTestObject.m */,
 				1AE30D201B7353B700DB7DBD /* UOPost.h */,
@@ -418,7 +423,8 @@
 			files = (
 				1A6CEFE31B70639D007B5A78 /* UOTestObject.m in Sources */,
 				6003F59E195388D20070C39A /* UOAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* UOViewController.m in Sources */,
+				1AB62C101B81E8AD007AF618 /* UOPostViewController.m in Sources */,
+				1AB62C131B82BDD0007AF618 /* UOPostsViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				1AE30D291B73557300DB7DBD /* UOComment.m in Sources */,
 				1AE30D251B7353C100DB7DBD /* UOUser.m in Sources */,
