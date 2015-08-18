@@ -10,5 +10,5 @@
 
 @protocol UOMutableObject <NSObject>
 @optional
-- (void)notifyUpdates;
+- (void)synchronize;
 @end

@@ -42,6 +42,14 @@ describe(@"UOPost", ^{
         expect(mutablePost.content).to.equal(post.content);
         expect(mutablePost.user).to.equal(post.user);
     });
+    
+    it(@"should edit content", ^{
+        NSString *newContent = @"Ola qua tal";
+        [post edit:^(UOMutablePost *mutablePost) {
+            mutablePost.content = newContent;
+        }];
+        expect(post.content).to.equal(newContent);
+    });
 });
 
 SpecEnd

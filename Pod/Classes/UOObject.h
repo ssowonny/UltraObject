@@ -12,7 +12,9 @@
 
 #define UOObjectIDKey @"id"
 
+@protocol UOMutableObject;
 typedef id<NSCoding, NSCopying> UOID;
+typedef void (^UOEditBlock)(id<UOMutableObject>);
 
 @interface UOObject : JSONModel<NSCopying, NSMutableCopying>
 @property (nonatomic, readonly) UOID id;
@@ -31,5 +33,7 @@ typedef id<NSCoding, NSCopying> UOID;
 
 - (void)addObservingTarget:(id)target action:(SEL)action;
 - (void)removeObservingTarget:(id)target action:(SEL)action;
+
+- (void)edit:(UOEditBlock)block;
 
 @end

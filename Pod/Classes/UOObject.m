@@ -88,6 +88,12 @@
     [[UOEventCenter eventCenter] removeObservingTarget:target action:action object:self];
 }
 
+- (void)edit:(UOEditBlock)block {
+    UOObject<UOMutableObject> *mutableObject = [self mutableCopy];
+    block(mutableObject);
+    [mutableObject synchronize];
+}
+
 #pragma mark - Private methods
 
 @end
