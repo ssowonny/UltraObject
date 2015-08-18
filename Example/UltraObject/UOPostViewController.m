@@ -7,6 +7,7 @@
 //
 
 #import "UOPostViewController.h"
+#import "UOEditViewController.h"
 #import "UOPost.h"
 #import "UOUser.h"
 
@@ -32,6 +33,13 @@
 
 - (void)onPostEvent:(UOPost *)post {
     [self bindPost];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"EditPost"]) {
+        UOEditViewController *editViewController = segue.destinationViewController;
+        editViewController.post = _post;
+    }
 }
 
 #pragma mark - Private

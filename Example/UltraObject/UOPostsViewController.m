@@ -49,11 +49,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UOPost *post = _posts[indexPath.item];
-    [self performSegueWithIdentifier:@"ShowPostView" sender:post];
+    [self performSegueWithIdentifier:@"ShowPost" sender:post];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"ShowPostView"]) {
+    if ([segue.identifier isEqualToString:@"ShowPost"]) {
         UOPostViewController *postViewController = segue.destinationViewController;
         postViewController.post = sender;
     }

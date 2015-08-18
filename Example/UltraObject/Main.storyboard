@@ -9,7 +9,6 @@
         <!--Navigation Controller-->
         <scene sceneID="TxF-tF-gNu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vcm-YO-lsw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="GRw-nC-chl" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Pc-WO-wqk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -19,6 +18,7 @@
                         <segue destination="HAm-99-DcJ" kind="relationship" relationship="rootViewController" id="9fa-sF-u6a"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vcm-YO-lsw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-467" y="912"/>
         </scene>
@@ -59,7 +59,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="6As-pJ-BtW"/>
                     <connections>
-                        <segue destination="EHz-8E-mZV" kind="show" identifier="ShowPostView" id="tVZ-14-dtf"/>
+                        <segue destination="EHz-8E-mZV" kind="show" identifier="ShowPost" id="tVZ-14-dtf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AtI-1V-jgI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -112,6 +112,15 @@
                             </mask>
                         </variation>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="OyH-PI-o0Q">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="6G1-6M-Vcr">
+                            <connections>
+                                <segue destination="ta6-U7-5wl" kind="show" identifier="EditPost" id="VHH-cJ-STe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="contentLabel" destination="rDE-XA-Ii7" id="vWh-rn-LSQ"/>
                         <outlet property="userNameLabel" destination="tZs-7P-ALl" id="taC-Uy-xxn"/>
@@ -120,6 +129,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="isP-Vy-oKr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="945" y="912"/>
+        </scene>
+        <!--Edit View Controller-->
+        <scene sceneID="XvG-Eg-MB1">
+            <objects>
+                <viewController id="ta6-U7-5wl" customClass="UOEditViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5t3-qc-SUl"/>
+                        <viewControllerLayoutGuide type="bottom" id="tQS-Hm-BHS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iO4-ig-HE0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wzg-e9-CHd">
+                                <rect key="frame" x="16" y="84" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wzg-e9-CHd" firstAttribute="top" secondItem="5t3-qc-SUl" secondAttribute="bottom" constant="20" id="1DH-Xl-Fgh"/>
+                            <constraint firstItem="Wzg-e9-CHd" firstAttribute="leading" secondItem="iO4-ig-HE0" secondAttribute="leadingMargin" id="IQQ-Vt-mXr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Wzg-e9-CHd" secondAttribute="trailing" id="uft-tU-Htl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="DN7-ok-Haz">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="N5c-16-GY3">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="ta6-U7-5wl" id="w8K-6w-R6L"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="contentTextField" destination="Wzg-e9-CHd" id="Ps4-5i-vQS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vB8-OD-hxh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1631" y="912"/>
         </scene>
     </scenes>
 </document>

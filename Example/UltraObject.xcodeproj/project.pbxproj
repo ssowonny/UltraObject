@@ -11,6 +11,7 @@
 		1A9F29571B8189F6008D123A /* EventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A9F29551B8189EC008D123A /* EventTests.m */; };
 		1AB62C101B81E8AD007AF618 /* UOPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB62C0F1B81E8AD007AF618 /* UOPostViewController.m */; };
 		1AB62C131B82BDD0007AF618 /* UOPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB62C121B82BDD0007AF618 /* UOPostsViewController.m */; };
+		1AB62C161B82F2B3007AF618 /* UOEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB62C151B82F2B2007AF618 /* UOEditViewController.m */; };
 		1AB961521B73579500C970C7 /* PostTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D2A1B73566700DB7DBD /* PostTests.m */; };
 		1AE30D221B7353B700DB7DBD /* UOPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D211B7353B700DB7DBD /* UOPost.m */; };
 		1AE30D251B7353C100DB7DBD /* UOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D241B7353C100DB7DBD /* UOUser.m */; };
@@ -50,6 +51,8 @@
 		1AB62C0F1B81E8AD007AF618 /* UOPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOPostViewController.m; sourceTree = "<group>"; };
 		1AB62C111B82BDD0007AF618 /* UOPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOPostsViewController.h; sourceTree = "<group>"; };
 		1AB62C121B82BDD0007AF618 /* UOPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOPostsViewController.m; sourceTree = "<group>"; };
+		1AB62C141B82F2B2007AF618 /* UOEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOEditViewController.h; sourceTree = "<group>"; };
+		1AB62C151B82F2B2007AF618 /* UOEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOEditViewController.m; sourceTree = "<group>"; };
 		1AE30D201B7353B700DB7DBD /* UOPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOPost.h; sourceTree = "<group>"; };
 		1AE30D211B7353B700DB7DBD /* UOPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOPost.m; sourceTree = "<group>"; };
 		1AE30D231B7353C100DB7DBD /* UOUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOUser.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				1AB62C121B82BDD0007AF618 /* UOPostsViewController.m */,
 				1AB62C0E1B81E8AD007AF618 /* UOPostViewController.h */,
 				1AB62C0F1B81E8AD007AF618 /* UOPostViewController.m */,
+				1AB62C141B82F2B2007AF618 /* UOEditViewController.h */,
+				1AB62C151B82F2B2007AF618 /* UOEditViewController.m */,
 				1A6CEFE11B70639D007B5A78 /* UOTestObject.h */,
 				1A6CEFE21B70639D007B5A78 /* UOTestObject.m */,
 				1AE30D201B7353B700DB7DBD /* UOPost.h */,
@@ -429,6 +434,7 @@
 				1AE30D291B73557300DB7DBD /* UOComment.m in Sources */,
 				1AE30D251B7353C100DB7DBD /* UOUser.m in Sources */,
 				1AE30D221B7353B700DB7DBD /* UOPost.m in Sources */,
+				1AB62C161B82F2B3007AF618 /* UOEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
