@@ -124,6 +124,7 @@
                     <connections>
                         <outlet property="contentLabel" destination="rDE-XA-Ii7" id="vWh-rn-LSQ"/>
                         <outlet property="userNameLabel" destination="tZs-7P-ALl" id="taC-Uy-xxn"/>
+                        <segue destination="ta6-U7-5wl" kind="show" identifier="EditPost" id="gLl-gi-Nym"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="isP-Vy-oKr" userLabel="First Responder" sceneMemberID="firstResponder"/>

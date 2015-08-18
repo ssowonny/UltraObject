@@ -38,7 +38,7 @@
 }
 
 - (IBAction)editButtonPressed:(id)sender {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Edit Post" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Content" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self editPost];
     }];

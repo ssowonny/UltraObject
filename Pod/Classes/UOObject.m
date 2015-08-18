@@ -7,7 +7,6 @@
 //
 
 #import "UOObject.h"
-#import "NSString+Conversion.h"
 #import "UOObjectManager.h"
 #import "UOMutableObject.h"
 #import "UOObject+Protected.h"

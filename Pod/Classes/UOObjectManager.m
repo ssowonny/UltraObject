@@ -80,7 +80,7 @@ static UOObjectManager *__sharedManager;
     if (classesCount > 0 ) {
         classes = (Class *)malloc(sizeof(Class) * classesCount);
         classesCount = objc_getClassList(classes, classesCount);
-        for (int index = 0; index < classesCount; index++) {
+        for (int index = 0; index < classesCount; ++ index) {
             Class class = classes[index];
             if (class_conformsToProtocol(class, @protocol(UOMutableObject))) {
                 Class superClass = class_getSuperclass(class);
