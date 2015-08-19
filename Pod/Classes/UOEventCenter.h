@@ -6,11 +6,10 @@
 //
 //
 
-#import <Foundation/Foundation.h>
 #import "UOEvent.h"
+#import "UOObjectBlockObserver.h"
 
 @class UOObject;
-typedef void (^UOObservingBlock)(UOEvent *);
 
 @interface UOEventCenter : NSNotificationCenter
 
