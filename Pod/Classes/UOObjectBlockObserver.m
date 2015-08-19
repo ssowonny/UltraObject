@@ -12,23 +12,23 @@
 
 @implementation UOObjectBlockObserver
 
-+ (NSString *)keyForObservingBlock:(UOObservingBlock)observingBlock object:(UOObject *)object {
-    return [NSString stringWithFormat:@"UOEventObserver<ObservingBlock: %p><UOObject: %p>", observingBlock, object];
++ (NSString *)keyForEventBlock:(UOEventBlock)eventBlock object:(UOObject *)object {
+    return [NSString stringWithFormat:@"UOObjectBlockObserver<UOEventBlock: %p><UOObject: %p>", eventBlock, object];
 }
 
-- (instancetype)initWithTarget:(id)target block:(UOObservingBlock)block object:(UOObject *)object {
+- (instancetype)initWithTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object {
     self = [super initWithTarget:target class:object.UOClass];
     if (self) {
         _object = object;
-        _observingBlock = block;
+        _eventBlock = block;
     }
     return self;
 }
 
-- (instancetype)initWithTarget:(id)target block:(UOObservingBlock)block class:(Class)klass {
+- (instancetype)initWithTarget:(id)target block:(UOEventBlock)block class:(Class)klass {
     self = [super initWithTarget:target class:klass];
     if (self) {
-        _observingBlock = block;
+        _eventBlock = block;
     }
     return self;
 }
@@ -41,13 +41,13 @@
         return;
     }
     
-    if (_observingBlock) {
-        _observingBlock(event);
+    if (_eventBlock) {
+        _eventBlock(event);
     }
 }
 
 - (NSString *)key {
-    return [self.class keyForObservingBlock:_observingBlock object:_object];
+    return [self.class keyForEventBlock:_eventBlock object:_object];
 }
 
 @end

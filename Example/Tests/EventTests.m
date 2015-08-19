@@ -32,16 +32,16 @@ describe(@"UOEventCenter", ^{
     
     it(@"should perform observing block", ^{
         UOPost *post = [UOPost objectWithID:@1];
-        __block BOOL observingBlockPerformed = NO;
+        __block BOOL eventBlockPerformed = NO;
         __weak UOPost *weakPost = post;
         [post addObservingTarget:target block:^(UOEvent *event) {
-            observingBlockPerformed = YES;
+            eventBlockPerformed = YES;
             expect(event.type).to.equal(UOEventTypeUpdate);
             expect(event.object).to.equal(weakPost);
         }];
         
         [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
-        expect(observingBlockPerformed).to.beTruthy;
+        expect(eventBlockPerformed).to.beTruthy;
     });
     
     it(@"should receive proper event type", ^{
@@ -64,39 +64,39 @@ describe(@"UOEventCenter", ^{
     
     it(@"should remove deallocated observing blocks", ^{
         UOPost *post = [UOPost objectWithID:@1];
-        __block BOOL observingBlockPerformed = NO;
+        __block BOOL eventBlockPerformed = NO;
         [post addObservingTarget:target block:^(UOEvent *event) {
-            observingBlockPerformed = YES;
+            eventBlockPerformed = YES;
         }];
         
         target = nil;
         [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
-        expect(observingBlockPerformed).to.beFalsy;
+        expect(eventBlockPerformed).to.beFalsy;
     });
     
     it(@"should not perform other object's observing block", ^{
         UOPost *post = [UOPost objectWithID:@1];
         UOPost *otherPost = [UOPost objectWithID:@2];
         
-        __block BOOL observingBlockPerformed = NO;
+        __block BOOL eventBlockPerformed = NO;
         [post addObservingTarget:target block:^(UOEvent *event) {
-            observingBlockPerformed = YES;
+            eventBlockPerformed = YES;
         }];
         
         [[UOEventCenter eventCenter] postEventForObject:otherPost type:UOEventTypeUpdate];
-        expect(observingBlockPerformed).to.beFalsy;
+        expect(eventBlockPerformed).to.beFalsy;
     });
     
     it(@"should reuse observing blocks", ^{
         __block int callCount = 0;
-        UOObservingBlock observingBlock = ^(UOEvent *event) {
+        UOEventBlock eventBlock = ^(UOEvent *event) {
             ++ callCount;
         };
         
         UOPost *post = [UOPost objectWithID:@1];
         UOPost *otherPost = [UOPost objectWithID:@2];
-        [post addObservingTarget:target block:observingBlock];
-        [otherPost addObservingTarget:target block:observingBlock];
+        [post addObservingTarget:target block:eventBlock];
+        [otherPost addObservingTarget:target block:eventBlock];
         
         [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
         [[UOEventCenter eventCenter] postEventForObject:otherPost type:UOEventTypeUpdate];
@@ -105,15 +105,15 @@ describe(@"UOEventCenter", ^{
     
     it(@"should remove proper observing block", ^{
         __block int callCount = 0;
-        UOObservingBlock observingBlock = ^(UOEvent *event) {
+        UOEventBlock eventBlock = ^(UOEvent *event) {
             ++ callCount;
         };
         
         UOPost *post = [UOPost objectWithID:@1];
         UOPost *otherPost = [UOPost objectWithID:@2];
-        [post addObservingTarget:target block:observingBlock];
-        [otherPost addObservingTarget:target block:observingBlock];
-        [post removeObservingTarget:target block:observingBlock];
+        [post addObservingTarget:target block:eventBlock];
+        [otherPost addObservingTarget:target block:eventBlock];
+        [post removeObservingTarget:target block:eventBlock];
         
         [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
         [[UOEventCenter eventCenter] postEventForObject:otherPost type:UOEventTypeUpdate];
@@ -123,15 +123,15 @@ describe(@"UOEventCenter", ^{
     context(@"when editing post", ^{
         it(@"should perform observing block", ^{
             UOPost *post = [UOPost objectWithID:@1];
-            __block BOOL observingBlockPerformed = NO;
+            __block BOOL eventBlockPerformed = NO;
             [post addObservingTarget:target block:^(UOEvent *event) {
-                observingBlockPerformed = YES;
+                eventBlockPerformed = YES;
             }];
             
             [post edit:^(UOMutablePost *mutablePost) {
                 mutablePost.content = @"New content";
             }];
-            expect(observingBlockPerformed).to.beTruthy;
+            expect(eventBlockPerformed).to.beTruthy;
         });
     });
     

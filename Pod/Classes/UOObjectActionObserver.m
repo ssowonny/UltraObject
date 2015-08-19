@@ -12,7 +12,7 @@
 @implementation UOObjectActionObserver
 
 + (NSString *)keyForAction:(SEL)action object:(UOObject *)object {
-    return [NSString stringWithFormat:@"UOEventObserver<Action: %p><UOObject: %p>", action, object];
+    return [NSString stringWithFormat:@"UOObjectActionObserver<Action: %p><UOObject: %p>", action, object];
 }
 
 - (instancetype)initWithTarget:(id)target action:(SEL)action object:(UOObject *)object {

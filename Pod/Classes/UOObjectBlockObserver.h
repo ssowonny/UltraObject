@@ -7,18 +7,18 @@
 //
 
 #import "UOEventObserver.h"
+#import "UOBlockDefinitions.h"
 
 @class UOEvent;
-typedef void (^UOObservingBlock)(UOEvent *);
 
 @interface UOObjectBlockObserver : UOEventObserver
 
 @property (nonatomic, weak, readonly) UOObject *object;
-@property (nonatomic, strong, readonly) UOObservingBlock observingBlock;
+@property (nonatomic, strong, readonly) UOEventBlock eventBlock;
 
-+ (NSString *)keyForObservingBlock:(UOObservingBlock)observingBlock object:(UOObject *)object;
++ (NSString *)keyForEventBlock:(UOEventBlock)eventBlock object:(UOObject *)object;
 
-- (instancetype)initWithTarget:(id)target block:(UOObservingBlock)block object:(UOObject *)object;
-- (instancetype)initWithTarget:(id)target block:(UOObservingBlock)block class:(Class)klass;
+- (instancetype)initWithTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object;
+- (instancetype)initWithTarget:(id)target block:(UOEventBlock)block class:(Class)klass;
 
 @end

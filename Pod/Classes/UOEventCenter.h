@@ -7,7 +7,7 @@
 //
 
 #import "UOEvent.h"
-#import "UOObjectBlockObserver.h"
+#import "UOBlockDefinitions.h"
 
 @class UOObject;
 
@@ -15,13 +15,13 @@
 
 + (UOEventCenter *)eventCenter;
 
-- (void)addObservingTarget:(id)target block:(UOObservingBlock)block class:(Class)klass;
-- (void)addObservingTarget:(id)target block:(UOObservingBlock)block object:(UOObject *)object;
+- (void)addObservingTarget:(id)target block:(UOEventBlock)block class:(Class)klass;
+- (void)addObservingTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object;
 - (void)addObservingTarget:(id)target action:(SEL)action class:(Class)klass;
 - (void)addObservingTarget:(id)target action:(SEL)action object:(UOObject *)object;
 
-- (void)removeObservingTarget:(id)target block:(UOObservingBlock)block;
-- (void)removeObservingTarget:(id)target block:(UOObservingBlock)block object:(UOObject *)object;
+- (void)removeObservingTarget:(id)target block:(UOEventBlock)block;
+- (void)removeObservingTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object;
 - (void)removeObservingTarget:(id)target action:(SEL)action;
 - (void)removeObservingTarget:(id)target action:(SEL)action object:(UOObject *)object;
 

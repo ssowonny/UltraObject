@@ -34,11 +34,11 @@
     return object;
 }
 
-+ (void)addObservingTarget:(id)target block:(UOObservingBlock)block {
++ (void)addObservingTarget:(id)target block:(UOEventBlock)block {
     [[UOEventCenter eventCenter] addObservingTarget:target block:block class:self.UOClass];
 }
 
-+ (void)removeObservingTarget:(id)target block:(UOObservingBlock)block {
++ (void)removeObservingTarget:(id)target block:(UOEventBlock)block {
     [[UOEventCenter eventCenter] removeObservingTarget:target block:block];
 }
 
@@ -77,11 +77,11 @@
     return mutableObject;
 }
 
-- (void)addObservingTarget:(id)target block:(UOObservingBlock)block {
+- (void)addObservingTarget:(id)target block:(UOEventBlock)block {
     [[UOEventCenter eventCenter] addObservingTarget:target block:block object:self];
 }
 
-- (void)removeObservingTarget:(id)target block:(UOObservingBlock)block {
+- (void)removeObservingTarget:(id)target block:(UOEventBlock)block {
     [[UOEventCenter eventCenter] removeObservingTarget:target block:block object:self];
 }
 
