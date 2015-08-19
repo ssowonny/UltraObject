@@ -44,6 +44,24 @@ describe(@"UOEventCenter", ^{
         expect(observingBlockPerformed).to.beTruthy;
     });
     
+    it(@"should receive proper event type", ^{
+        __block UOEventType expectedEventType;
+        [UOPost addObservingTarget:target block:^(UOEvent *event) {
+            expect(event.type).to.equal(expectedEventType);
+        }];
+        
+        expectedEventType = UOEventTypeCreate;
+        UOPost *post = [UOPost new:@{@"id": @1}];
+        
+        expectedEventType = UOEventTypeUpdate;
+        [post edit:^(UOMutablePost *mutablePost) {
+            mutablePost.content = @"new content";
+        }];
+        
+        expectedEventType = UOEventTypeDelete;
+        [post destroy];
+    });
+    
     it(@"should remove deallocated observing blocks", ^{
         UOPost *post = [UOPost objectWithID:@1];
         __block BOOL observingBlockPerformed = NO;

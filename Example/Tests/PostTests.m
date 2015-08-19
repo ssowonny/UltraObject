@@ -50,6 +50,12 @@ describe(@"UOPost", ^{
         }];
         expect(post.content).to.equal(newContent);
     });
+    
+    it(@"should create new post", ^{
+        NSDictionary *postJSON = @{@"id": @1, @"content": @"Hi There"};
+        UOPost *newPost = [UOPost new:postJSON];
+        expect(newPost.content).to.equal(postJSON[@"content"]);
+    });
 });
 
 SpecEnd

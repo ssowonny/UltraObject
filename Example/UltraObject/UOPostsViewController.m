@@ -8,6 +8,7 @@
 
 #import "UOPostsViewController.h"
 #import "UOPostViewController.h"
+#import "UOEditViewController.h"
 #import "UOPost.h"
 #import "UOUser.h"
 
@@ -31,15 +32,20 @@
 
 - (void)onPostEvent:(UOEvent *)event {
     UOPost *post = event.object;
-    if (![_posts containsObject:post]) {
-        return;
+    if (event.type == UOEventTypeCreate) {
+        [_posts insertObject:post atIndex:0];
+        [self.tableView reloadData];
+        
+    } else if([_posts containsObject:post]) {
+        if (event.type == UOEventTypeDelete) {
+            [_posts removeObject:post];
+        }
+        [self.tableView reloadData];
     }
-    
-    if (event.type == UOEventTypeDelete) {
-        [_posts removeObject:post];
-    }
-    
-    [self.tableView reloadData];
+}
+
+- (IBAction)newButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"NewPost" sender:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -63,6 +69,9 @@
     if ([segue.identifier isEqualToString:@"ShowPost"]) {
         UOPostViewController *postViewController = segue.destinationViewController;
         postViewController.post = sender;
+    } else if ([segue.identifier isEqualToString:@"ShowPost"]) {
+        UOEditViewController *editViewController = segue.destinationViewController;
+        editViewController.post = [UOPost new];
     }
 }
 

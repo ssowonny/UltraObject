@@ -28,6 +28,12 @@
     return [[UOObjectManager sharedManager] objectWithClass:self.UOClass forID:ID];
 }
 
++ (instancetype)new:(NSDictionary *)json {
+    UOObject *object = [[UOObjectManager sharedManager] objectWithClass:self.UOClass forJSON:json];
+    [object postEventWithType:UOEventTypeCreate];
+    return object;
+}
+
 + (void)addObservingTarget:(id)target block:(UOObservingBlock)block {
     [[UOEventCenter eventCenter] addObservingTarget:target block:block class:self.UOClass];
 }

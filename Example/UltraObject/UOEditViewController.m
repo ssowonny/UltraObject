@@ -9,6 +9,8 @@
 #import "UOEditViewController.h"
 #import "UOPost.h"
 
+static NSUInteger __latestPostID = 100;
+
 @interface UOEditViewController ()
 @property (nonatomic, weak) IBOutlet UITextField *contentTextField;
 @end
@@ -28,9 +30,15 @@
 #pragma mark - Private
 
 - (void)savePost {
-    [_post edit:^(UOMutablePost *post) {
-        post.content = _contentTextField.text;
-    }];
+    if (_post.id) {
+        [_post edit:^(UOMutablePost *post) {
+            post.content = _contentTextField.text;
+        }];
+    } else {
+        [UOPost new:@{@"id": @(__latestPostID ++),
+                      @"content": _contentTextField.text,
+                      @"user": @{@"id": @100, @"name": @"Guybrush Threepwood"}}];
+    }
 }
 
 - (void)bindPost {

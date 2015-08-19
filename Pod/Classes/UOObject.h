@@ -21,6 +21,7 @@ typedef void (^UOEditBlock)(id<UOMutableObject>);
 
 + (instancetype)objectWithID:(UOID)ID;
 + (instancetype)objectWithJSON:(NSDictionary *)json;
++ (instancetype)new:(NSDictionary *)json;
 
 + (void)addObservingTarget:(id)target block:(UOObservingBlock)block;
 + (void)removeObservingTarget:(id)target block:(UOObservingBlock)block;

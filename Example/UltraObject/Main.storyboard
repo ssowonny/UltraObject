@@ -57,9 +57,16 @@
                             <outlet property="delegate" destination="HAm-99-DcJ" id="ne8-9t-BOB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="6As-pJ-BtW"/>
+                    <navigationItem key="navigationItem" id="5NH-T6-DZ6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Niq-LA-jec">
+                            <connections>
+                                <action selector="newButtonPressed:" destination="HAm-99-DcJ" id="SPb-ng-dpq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="EHz-8E-mZV" kind="show" identifier="ShowPost" id="tVZ-14-dtf"/>
+                        <segue destination="ta6-U7-5wl" kind="show" identifier="NewPost" id="r2n-4Z-X7b"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AtI-1V-jgI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -169,7 +176,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vB8-OD-hxh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1631" y="912"/>
+            <point key="canvasLocation" x="945" y="182"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="r2n-4Z-X7b"/>
+    </inferredMetricsTieBreakers>
 </document>
