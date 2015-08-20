@@ -27,46 +27,46 @@ static UOEventCenter *__eventCenter;
     return __eventCenter;
 }
 
-- (UOEventObserver *)addObservingTarget:(id)target block:(UOEventBlock)block class:(Class)klass {
+- (UOEventObserver *)addObserverWithTarget:(id)target block:(UOEventBlock)block class:(Class)klass {
     UOEventObserver *eventObserver = [[UOObjectBlockObserver alloc] initWithTarget:target block:block class:klass];
     [self addEventObserver:eventObserver];
     return eventObserver;
 }
 
-- (UOEventObserver *)addObservingTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object {
+- (UOEventObserver *)addObserverWithTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object {
     UOEventObserver *eventObserver = [[UOObjectBlockObserver alloc] initWithTarget:target block:block object:object];
     [self addEventObserver:eventObserver];
     return eventObserver;
 }
 
-- (UOEventObserver *)addObservingTarget:(id)target action:(SEL)action class:(Class)klass {
+- (UOEventObserver *)addObserverWithTarget:(id)target action:(SEL)action class:(Class)klass {
     UOEventObserver *eventObserver = [[UOObjectActionObserver alloc] initWithTarget:target action:action class:klass];
     [self addEventObserver:eventObserver];
     return eventObserver;
 }
 
-- (UOEventObserver *)addObservingTarget:(id)target action:(SEL)action object:(UOObject *)object {
+- (UOEventObserver *)addObserverWithTarget:(id)target action:(SEL)action object:(UOObject *)object {
     UOEventObserver *eventObserver = [[UOObjectActionObserver alloc] initWithTarget:target action:action object:object];
     [self addEventObserver:eventObserver];
     return eventObserver;
 }
 
-- (void)removeObservingTarget:(id)target block:(UOEventBlock)block {
+- (void)removeObserverWithTarget:(id)target block:(UOEventBlock)block {
     NSString *key = [UOObjectBlockObserver keyForEventBlock:block object:nil];
     [self removeEventObserverForKey:key target:target];
 }
 
-- (void)removeObservingTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object {
+- (void)removeObserverWithTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object {
     NSString *key = [UOObjectBlockObserver keyForEventBlock:block object:object];
     [self removeEventObserverForKey:key target:target];
 }
 
-- (void)removeObservingTarget:(id)target action:(SEL)action {
+- (void)removeObserverWithTarget:(id)target action:(SEL)action {
     NSString *key = [UOObjectActionObserver keyForAction:action object:nil];
     [self removeEventObserverForKey:key target:target];
 }
 
-- (void)removeObservingTarget:(id)target action:(SEL)action object:(UOObject *)object {
+- (void)removeObserverWithTarget:(id)target action:(SEL)action object:(UOObject *)object {
     NSString *key = [UOObjectActionObserver keyForAction:action object:object];
     [self removeEventObserverForKey:key target:target];
 }

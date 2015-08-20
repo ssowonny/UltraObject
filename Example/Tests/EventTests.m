@@ -34,7 +34,7 @@ describe(@"UOEventCenter", ^{
         UOPost *post = [UOPost objectWithID:@1];
         __block BOOL eventBlockPerformed = NO;
         __weak UOPost *weakPost = post;
-        [post addObservingTarget:target block:^(UOEvent *event) {
+        [post addObserverWithTarget:target block:^(UOEvent *event) {
             eventBlockPerformed = YES;
             expect(event.type).to.equal(UOEventTypeUpdate);
             expect(event.object).to.equal(weakPost);
@@ -46,7 +46,7 @@ describe(@"UOEventCenter", ^{
     
     it(@"should receive proper event type", ^{
         __block UOEventType expectedEventType;
-        [UOPost addObservingTarget:target block:^(UOEvent *event) {
+        [UOPost addObserverWithTarget:target block:^(UOEvent *event) {
             expect(event.type).to.equal(expectedEventType);
         }];
         
@@ -65,7 +65,7 @@ describe(@"UOEventCenter", ^{
     it(@"should remove deallocated observing blocks", ^{
         UOPost *post = [UOPost objectWithID:@1];
         __block BOOL eventBlockPerformed = NO;
-        [post addObservingTarget:target block:^(UOEvent *event) {
+        [post addObserverWithTarget:target block:^(UOEvent *event) {
             eventBlockPerformed = YES;
         }];
         
@@ -79,7 +79,7 @@ describe(@"UOEventCenter", ^{
         UOPost *otherPost = [UOPost objectWithID:@2];
         
         __block BOOL eventBlockPerformed = NO;
-        [post addObservingTarget:target block:^(UOEvent *event) {
+        [post addObserverWithTarget:target block:^(UOEvent *event) {
             eventBlockPerformed = YES;
         }];
         
@@ -95,8 +95,8 @@ describe(@"UOEventCenter", ^{
         
         UOPost *post = [UOPost objectWithID:@1];
         UOPost *otherPost = [UOPost objectWithID:@2];
-        [post addObservingTarget:target block:eventBlock];
-        [otherPost addObservingTarget:target block:eventBlock];
+        [post addObserverWithTarget:target block:eventBlock];
+        [otherPost addObserverWithTarget:target block:eventBlock];
         
         [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
         [[UOEventCenter eventCenter] postEventForObject:otherPost type:UOEventTypeUpdate];
@@ -111,9 +111,9 @@ describe(@"UOEventCenter", ^{
         
         UOPost *post = [UOPost objectWithID:@1];
         UOPost *otherPost = [UOPost objectWithID:@2];
-        [post addObservingTarget:target block:eventBlock];
-        [otherPost addObservingTarget:target block:eventBlock];
-        [post removeObservingTarget:target block:eventBlock];
+        [post addObserverWithTarget:target block:eventBlock];
+        [otherPost addObserverWithTarget:target block:eventBlock];
+        [post removeObserverWithTarget:target block:eventBlock];
         
         [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
         [[UOEventCenter eventCenter] postEventForObject:otherPost type:UOEventTypeUpdate];
@@ -124,7 +124,7 @@ describe(@"UOEventCenter", ^{
         it(@"should perform observing block", ^{
             UOPost *post = [UOPost objectWithID:@1];
             __block BOOL eventBlockPerformed = NO;
-            [post addObservingTarget:target block:^(UOEvent *event) {
+            [post addObserverWithTarget:target block:^(UOEvent *event) {
                 eventBlockPerformed = YES;
             }];
             
@@ -141,7 +141,7 @@ describe(@"UOEventCenter", ^{
         beforeEach(^{
             classEventCallCount = 0;
             
-            [UOPost addObservingTarget:target block:^(UOEvent *event) {
+            [UOPost addObserverWithTarget:target block:^(UOEvent *event) {
                 ++ classEventCallCount;
             }];
         });
@@ -172,7 +172,7 @@ describe(@"UOEventCenter", ^{
         
         it(@"should call action selector for class events", ^{
             UOTargetWithAction *target = [UOTargetWithAction new];
-            [UOPost addObservingTarget:target action:@selector(onEvent:)];
+            [UOPost addObserverWithTarget:target action:@selector(onEvent:)];
             
             UOPost *post = [UOPost objectWithID:@1];
             [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];

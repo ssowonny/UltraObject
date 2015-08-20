@@ -34,20 +34,20 @@
     return object;
 }
 
-+ (void)addObservingTarget:(id)target block:(UOEventBlock)block {
-    [[UOEventCenter eventCenter] addObservingTarget:target block:block class:self.UOClass];
++ (void)addObserverWithTarget:(id)target block:(UOEventBlock)block {
+    [[UOEventCenter eventCenter] addObserverWithTarget:target block:block class:self.UOClass];
 }
 
-+ (void)removeObservingTarget:(id)target block:(UOEventBlock)block {
-    [[UOEventCenter eventCenter] removeObservingTarget:target block:block];
++ (void)removeObserverWithTarget:(id)target block:(UOEventBlock)block {
+    [[UOEventCenter eventCenter] removeObserverWithTarget:target block:block];
 }
 
-+ (void)addObservingTarget:(id)target action:(SEL)action {
-    [[UOEventCenter eventCenter] addObservingTarget:target action:action class:self.UOClass];
++ (void)addObserverWithTarget:(id)target action:(SEL)action {
+    [[UOEventCenter eventCenter] addObserverWithTarget:target action:action class:self.UOClass];
 }
 
-+ (void)removeObservingTarget:(id)target action:(SEL)action {
-    [[UOEventCenter eventCenter] removeObservingTarget:target action:action object:nil];
++ (void)removeObserverWithTarget:(id)target action:(SEL)action {
+    [[UOEventCenter eventCenter] removeObserverWithTarget:target action:action object:nil];
 }
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err {
@@ -81,20 +81,20 @@
     return mutableObject;
 }
 
-- (void)addObservingTarget:(id)target block:(UOEventBlock)block {
-    [[UOEventCenter eventCenter] addObservingTarget:target block:block object:self];
+- (void)addObserverWithTarget:(id)target block:(UOEventBlock)block {
+    [[UOEventCenter eventCenter] addObserverWithTarget:target block:block object:self];
 }
 
-- (void)removeObservingTarget:(id)target block:(UOEventBlock)block {
-    [[UOEventCenter eventCenter] removeObservingTarget:target block:block object:self];
+- (void)removeObserverWithTarget:(id)target block:(UOEventBlock)block {
+    [[UOEventCenter eventCenter] removeObserverWithTarget:target block:block object:self];
 }
 
 - (void)addObservingTarget:(id)target action:(SEL)action {
-    [[UOEventCenter eventCenter] addObservingTarget:target action:action object:self];
+    [[UOEventCenter eventCenter] addObserverWithTarget:target action:action object:self];
 }
 
 - (void)removeObservingTarget:(id)target action:(SEL)action {
-    [[UOEventCenter eventCenter] removeObservingTarget:target action:action object:self];
+    [[UOEventCenter eventCenter] removeObserverWithTarget:target action:action object:self];
 }
 
 - (void)postEventWithType:(UOEventType)type {

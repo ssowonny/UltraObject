@@ -29,14 +29,14 @@ typedef void (^UOEditBlock)(id<UOMutableObject>);
 + (instancetype)objectWithJSON:(NSDictionary *)json;
 + (instancetype)new:(NSDictionary *)json;
 
-+ (void)addObservingTarget:(id)target block:(UOEventBlock)block;
-+ (void)removeObservingTarget:(id)target block:(UOEventBlock)block;
++ (void)addObserverWithTarget:(id)target block:(UOEventBlock)block;
++ (void)removeObserverWithTarget:(id)target block:(UOEventBlock)block;
 
-+ (void)addObservingTarget:(id)target action:(SEL)action;
-+ (void)removeObservingTarget:(id)target action:(SEL)action;
++ (void)addObserverWithTarget:(id)target action:(SEL)action;
++ (void)removeObserverWithTarget:(id)target action:(SEL)action;
 
-- (void)addObservingTarget:(id)target block:(UOEventBlock)block;
-- (void)removeObservingTarget:(id)target block:(UOEventBlock)block;
+- (void)addObserverWithTarget:(id)target block:(UOEventBlock)block;
+- (void)removeObserverWithTarget:(id)target block:(UOEventBlock)block;
 
 - (void)addObservingTarget:(id)target action:(SEL)action;
 - (void)removeObservingTarget:(id)target action:(SEL)action;
