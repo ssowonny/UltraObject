@@ -10,10 +10,16 @@
 #import <JSONModel/JSONModel.h>
 #import "UOEventCenter.h"
 
+#ifndef UOObjectIDKey
 #define UOObjectIDKey @"id"
+#endif
+
+#ifndef UOObjectIDType
+#define UOObjectIDType id<NSCoding, NSCopying>
+#endif
 
 @protocol UOMutableObject;
-typedef id<NSCoding, NSCopying> UOID;
+typedef UOObjectIDType UOID;
 typedef void (^UOEditBlock)(id<UOMutableObject>);
 
 @interface UOObject : JSONModel<NSCopying, NSMutableCopying>
