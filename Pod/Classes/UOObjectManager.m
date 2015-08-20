@@ -47,20 +47,22 @@ static UOObjectManager *__sharedManager;
 }
 
 - (id)objectWithClass:(Class)klass forID:(UOID)ID {
-    NSString *classKey = NSStringFromClass(klass);
-    NSMutableDictionary *objects = _classObjects[classKey];
-    if (!objects) {
-        objects = [NSMutableDictionary new];
-        _classObjects[classKey] = objects;
-    }
-    
-    UOObject *object = objects[ID];
+    NSMutableDictionary *objects = [self dictionaryForClass:klass];
+    NSValue *value = objects[ID];
+    UOObject *object = [value nonretainedObjectValue];
     if (!object) {
         object = [[klass alloc] initWithID:ID];
-        objects[ID] = object;
+        objects[ID] = [NSValue valueWithNonretainedObject:object];
     }
     
     return object;
+}
+
+- (void)removeObject:(UOObject *)object {
+    NSMutableDictionary *objects = [self dictionaryForClass:object.UOClass];
+    if (object.id && [objects[object.id] nonretainedObjectValue] == object) {
+        [objects removeObjectForKey:object.id];
+    }
 }
 
 - (id)objectWithClass:(Class)klass forJSON:(NSDictionary *)json {
@@ -71,6 +73,17 @@ static UOObjectManager *__sharedManager;
 }
 
 #pragma mark - Private
+
+- (NSMutableDictionary *)dictionaryForClass:(Class)klass {
+    NSString *classKey = NSStringFromClass(klass);
+    NSMutableDictionary *objects = _classObjects[classKey];
+    if (!objects) {
+        objects = [NSMutableDictionary new];
+        _classObjects[classKey] = objects;
+    }
+    
+    return objects;
+}
 
 - (void)initMutableClasses {
     NSMutableDictionary *mutableClasses = [NSMutableDictionary new];

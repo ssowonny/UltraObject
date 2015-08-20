@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "UOObject.h"
 
+@class UOObject;
+
 @interface UOObjectManager : NSObject
 
 + (UOObjectManager *)sharedManager;
@@ -16,5 +18,6 @@
 - (Class)mutableClassWithClass:(Class)klass;
 - (id)objectWithClass:(Class)klass forID:(UOID)ID;
 - (id)objectWithClass:(Class)klass forJSON:(NSDictionary *)json;
+- (void)removeObject:(UOObject *)object;
 
 @end

@@ -64,6 +64,10 @@
     return [super initWithDictionary:dict error:err];
 }
 
+- (void)dealloc {
+    [[UOObjectManager sharedManager] removeObject:self];
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     UOObject *object = [[self.UOClass allocWithZone:zone] init];
     [object importDictionary:[self toDictionary]];
