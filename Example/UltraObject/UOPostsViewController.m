@@ -12,7 +12,7 @@
 #import "UOPost.h"
 #import "UOUser.h"
 
-@interface UOPostsViewController () {
+@interface UOPostsViewController () <UOObjectArrayDelegate> {
     NSMutableArray *_posts;
 }
 
@@ -27,26 +27,36 @@
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[dummyData dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
     
     _posts = [UOPost arrayOfModelsFromDictionaries:json[@"posts"]];
-    [UOPost addObservingTarget:self action:@selector(onPostEvent:)];
+    [_posts setObjectArrayDelegate:self class:UOPost.class];
 }
 
-- (void)onPostEvent:(UOEvent *)event {
-    UOPost *post = event.object;
-    if (event.type == UOEventTypeCreate) {
-        [_posts insertObject:post atIndex:0];
-        [self.tableView reloadData];
-        
-    } else if([_posts containsObject:post]) {
-        if (event.type == UOEventTypeDelete) {
-            [_posts removeObject:post];
-        }
-        [self.tableView reloadData];
-    }
+#pragma mark - object array delegate
+
+- (void)objectArray:(NSMutableArray *)array didReceiveEvent:(UOEvent *)event {
+    [self.tableView reloadData];
 }
+
+- (NSUInteger)objectArray:(NSMutableArray *)array indexOfNewObject:(UOObject *)object {
+    return 0;
+}
+
+#pragma mark - view controller actions
 
 - (IBAction)newButtonPressed:(id)sender {
     [self performSegueWithIdentifier:@"NewPost" sender:nil];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowPost"]) {
+        UOPostViewController *postViewController = segue.destinationViewController;
+        postViewController.post = sender;
+    } else if ([segue.identifier isEqualToString:@"ShowPost"]) {
+        UOEditViewController *editViewController = segue.destinationViewController;
+        editViewController.post = [UOPost new];
+    }
+}
+
+#pragma mark - table view data source and delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _posts.count;
@@ -63,16 +73,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UOPost *post = _posts[indexPath.item];
     [self performSegueWithIdentifier:@"ShowPost" sender:post];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"ShowPost"]) {
-        UOPostViewController *postViewController = segue.destinationViewController;
-        postViewController.post = sender;
-    } else if ([segue.identifier isEqualToString:@"ShowPost"]) {
-        UOEditViewController *editViewController = segue.destinationViewController;
-        editViewController.post = [UOPost new];
-    }
 }
 
 @end

@@ -11,5 +11,6 @@
 
 #import "UOObject.h"
 #import "UOMutableObject.h"
+#import "NSMutableArray+UOObject.h"
 
 #endif

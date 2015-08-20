@@ -9,16 +9,16 @@
 #import "UOEvent.h"
 #import "UOBlockDefinitions.h"
 
-@class UOObject;
+@class UOObject, UOEventObserver;
 
 @interface UOEventCenter : NSNotificationCenter
 
 + (UOEventCenter *)eventCenter;
 
-- (void)addObservingTarget:(id)target block:(UOEventBlock)block class:(Class)klass;
-- (void)addObservingTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object;
-- (void)addObservingTarget:(id)target action:(SEL)action class:(Class)klass;
-- (void)addObservingTarget:(id)target action:(SEL)action object:(UOObject *)object;
+- (UOEventObserver *)addObservingTarget:(id)target block:(UOEventBlock)block class:(Class)klass;
+- (UOEventObserver *)addObservingTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object;
+- (UOEventObserver *)addObservingTarget:(id)target action:(SEL)action class:(Class)klass;
+- (UOEventObserver *)addObservingTarget:(id)target action:(SEL)action object:(UOObject *)object;
 
 - (void)removeObservingTarget:(id)target block:(UOEventBlock)block;
 - (void)removeObservingTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object;

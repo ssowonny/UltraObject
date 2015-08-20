@@ -27,24 +27,28 @@ static UOEventCenter *__eventCenter;
     return __eventCenter;
 }
 
-- (void)addObservingTarget:(id)target block:(UOEventBlock)block class:(Class)klass {
+- (UOEventObserver *)addObservingTarget:(id)target block:(UOEventBlock)block class:(Class)klass {
     UOEventObserver *eventObserver = [[UOObjectBlockObserver alloc] initWithTarget:target block:block class:klass];
     [self addEventObserver:eventObserver];
+    return eventObserver;
 }
 
-- (void)addObservingTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object {
+- (UOEventObserver *)addObservingTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object {
     UOEventObserver *eventObserver = [[UOObjectBlockObserver alloc] initWithTarget:target block:block object:object];
     [self addEventObserver:eventObserver];
+    return eventObserver;
 }
 
-- (void)addObservingTarget:(id)target action:(SEL)action class:(Class)klass {
+- (UOEventObserver *)addObservingTarget:(id)target action:(SEL)action class:(Class)klass {
     UOEventObserver *eventObserver = [[UOObjectActionObserver alloc] initWithTarget:target action:action class:klass];
     [self addEventObserver:eventObserver];
+    return eventObserver;
 }
 
-- (void)addObservingTarget:(id)target action:(SEL)action object:(UOObject *)object {
+- (UOEventObserver *)addObservingTarget:(id)target action:(SEL)action object:(UOObject *)object {
     UOEventObserver *eventObserver = [[UOObjectActionObserver alloc] initWithTarget:target action:action object:object];
     [self addEventObserver:eventObserver];
+    return eventObserver;
 }
 
 - (void)removeObservingTarget:(id)target block:(UOEventBlock)block {
