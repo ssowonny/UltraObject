@@ -5,10 +5,10 @@
 [![License](https://img.shields.io/cocoapods/l/UltraObject.svg?style=flat)](http://cocoapods.org/pods/UltraObject)
 [![Platform](https://img.shields.io/cocoapods/p/UltraObject.svg?style=flat)](http://cocoapods.org/pods/UltraObject)
 
-Ultra Object is event based model framework. It makes managing objects
-easier. Especially if you're using RESTful api, this can be a good
-solution for creating, updating and destroying objects while applying
-the changes to views and controllers.
+Ultra Object is event based model framework. It helps you to manage
+objects easily. Especially if you're using RESTful api, this can be
+a good solution for creating, updating and destroying objects while
+applying the changes to views and controllers.
 
 Ultra Object also helps you to apply mutable/immutable pattern.
 
@@ -173,6 +173,10 @@ pod "UltraObject"
 ## Author
 
 Sungwon Lee, ssowonny@gmail.com
+
+## Contribution
+
+Please fork it, edit, add specs and submit a pull request.
 
 ## License
 
