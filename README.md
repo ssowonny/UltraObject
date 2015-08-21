@@ -25,6 +25,25 @@ Ultra Object also helps you to apply mutable/immutable design pattern.
 @end
 ```
 
+### Create, update and destroy object
+
+```objc
+- (IBAction)createButtonPressed {
+    NSString *content = self.contentTextField.text;
+    [TodoObject new:@{@"id": @(++__uniqueID), @"content": content}];
+}
+
+- (IBAction)updateButtonPressed {
+    [self.todoObject edit:^(TodoObject *object) {
+        object.content = self.contentTextField.text;
+    }];
+}
+
+- (IBAction)deleteButtonPressed {
+    [self.todoObject destroy];
+}
+```
+
 ### Object observing
 
 You can easily notified if the object is modified via object observing.
@@ -33,16 +52,15 @@ You can easily notified if the object is modified via object observing.
 
 ```objc
 - (void)viewDidLoad {
-  [super viewDidLoad];
-
-  [self.todoObject addObserverWithTarget:self action:@selector(onTodoEvent:)];
+    [super viewDidLoad];
+    [self.todoObject addObserverWithTarget:self action:@selector(onTodoEvent:)];
 }
 
 - (void)onTodoEvent:(UOEvent *) {
-  if (event.type == UOEventTypeUpdate) {
-    TodoObject *object = event.object;
-    self.contentLabel.text = object.content;
-  }
+    if (event.type == UOEventTypeUpdate) {
+        TodoObject *object = event.object;
+        self.contentLabel.text = object.content;
+    }
 }
 ```
 
@@ -50,34 +68,42 @@ You can easily notified if the object is modified via object observing.
 
 ```objc
 [self.todoObject addObserverWithTarget:self block:^(UOEvent *)event {
-  NSLog(@"%@", event.object);
+    NSLog(@"%@", event.object);
 }];
 ```
 
 #### Observe all events for specific object class
 
-You will be informed every events for any objects of the class.
+You will be informed of every events for any objects of the class.
 
 ```objc
 [TodoObject addObserverWithTarget:self action:@selector(onTodoEvent:)];
 ```
 
-### Create, update and destroy object
+#### Observe object array
+
+You can set object array delegate to receive events for relevent
+objects. The mutable array will be automatically modified according to
+event type. For instance, `destroy` or `update` event will affect the
+mutable array by removing or updating data.
+
+You can also decide whether inserting newly created object to the array
+or not, or even insertion position for it.
 
 ```objc
-- (IBAction)createButtonPressed {
-  NSString *content = self.contentTextField.text;
-  [TodoObject new:@{@"id": @(++__uniqueID), @"content": content}];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    NSMutableArray *todoObjects = [TodoObject arrayOfModelsFromDictionaries:jsonArray];
+    [todoObjects setObjectArrayDelegate:self class:TodoObject.class];
 }
 
-- (IBAction)updateButtonPressed {
-  [self.todoObject edit:^(TodoObject *object) {
-    object.content = self.contentTextField.text;
-  }];
+- (void)objectArray:(NSMutableArray *)array didReceiveEvent:(UOEvent *)event {
+    [self.tableView reloadData];
 }
 
-- (IBAction)deleteButtonPressed {
-  [self.todoObject destroy];
+- (NSUInteger)objectArray:(NSMutableArray *)array indexOfNewObject:(UOObject *)object {
+    return 0;
 }
 ```
 
