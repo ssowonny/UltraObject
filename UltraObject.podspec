@@ -10,12 +10,14 @@
 Pod::Spec.new do |s|
   s.name             = "UltraObject"
   s.version          = "0.1.0"
-  s.summary          = "A short description of UltraObject."
+  s.summary          = "Ultra Object is event based model framework."
   s.description      = <<-DESC
-                       An optional longer description of UltraObject
+                       Ultra Object is event based model framework. It helps you to manage
+                       objects easily. Especially if you're using RESTful api, this can be
+                       a good solution for creating, updating and destroying objects while
+                       applying the changes to views and controllers.
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       Ultra Object also helps you to apply mutable/immutable pattern.
                        DESC
   s.homepage         = "https://github.com/ssowonny/UltraObject"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
