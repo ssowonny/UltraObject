@@ -36,7 +36,7 @@
     [self.tableView reloadData];
 }
 
-- (NSUInteger)objectArray:(NSMutableArray *)array indexOfNewObject:(UOObject *)object {
+- (NSUInteger)objectArray:(NSMutableArray *)array indexOfNewObject:(UOPost *)object {
     return 0;
 }
 

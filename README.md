@@ -10,7 +10,7 @@ easier. Especially if you're using RESTful api, this can be a good
 solution for creating, updating and destroying objects while applying
 the changes to views and controllers.
 
-Ultra Object also helps you to apply mutable/immutable design pattern.
+Ultra Object also helps you to apply mutable/immutable pattern.
 
 ## Usage
 
@@ -102,7 +102,7 @@ or not, or even insertion position for it.
     [self.tableView reloadData];
 }
 
-- (NSUInteger)objectArray:(NSMutableArray *)array indexOfNewObject:(UOObject *)object {
+- (NSUInteger)objectArray:(NSMutableArray *)array indexOfNewObject:(TodoObject *)object {
     return 0;
 }
 ```
@@ -112,6 +112,46 @@ or not, or even insertion position for it.
 Ultra Object uses [JSONModel](https://github.com/icanzilb/JSONModel).
 Please read [JSONModel#Basic Usage](https://github.com/icanzilb/JSONModel#basic-usage)
 section for loading objects from json.
+
+### Immutable objects
+
+If you want to make objects immutable for safety, you can define mutable
+object by subclassing original object and making it conforms to
+`UOMutableObject` protocol.
+
+Original object should define associated object for attributes to load
+json properly.
+
+```objc
+@interface TodoObject : UOObject
+@property (nonatomic, readonly) NSString *content;
+@end
+
+@interface MutableTodoObject : UOObject
+@property (nonatomic, readwrite) NSString *content;
+@end
+```
+
+```objc
+@interface TodoObject ()
+@property (nonatomic, strong) NSString *content;
+@end
+
+@implementation TodoObject
+@end
+
+@implementation MutableTodoObject
+@dynamic content;
+@end
+```
+
+`edit:` method will pass mutable object.
+
+```objc
+[self.todoObject edit:^(MutableTodoObject *)mutableObject {
+    mutableObject.content = @"New content";
+}];
+```
 
 ### Example Project
 
