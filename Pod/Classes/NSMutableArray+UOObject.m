@@ -25,7 +25,7 @@ const char NSMutableArrayObjectEventObserverKey;
     UOEventObserver *eventObserver = objc_getAssociatedObject(self, &NSMutableArrayObjectEventObserverKey);
     if (!eventObserver) {
         eventObserver = [[UOEventCenter eventCenter] addObserverWithTarget:self action:@selector(__onEvent:) class:klass];
-        objc_setAssociatedObject(self, &NSMutableArrayObjectEventObserverKey, eventObserver, OBJC_ASSOCIATION_RETAIN);
+        objc_setAssociatedObject(self, &NSMutableArrayObjectEventObserverKey, eventObserver, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
 }
 

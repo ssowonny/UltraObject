@@ -71,6 +71,14 @@ static UOEventCenter *__eventCenter;
     [self removeEventObserverForKey:key target:target];
 }
 
+- (void)removeEventObserver:(UOEventObserver *)eventObserver {
+    if (eventObserver.key && eventObserver.target) {
+        [self removeEventObserverForKey:eventObserver.key target:eventObserver.target];
+    } else {
+        [[NSNotificationCenter defaultCenter] removeObserver:eventObserver name:NSStringFromClass(eventObserver.klass) object:nil];
+    }
+}
+
 - (void)postEventForObject:(UOObject *)object type:(UOEventType)type {
     [self postEventForObject:object type:type userInfo:nil];
 }
@@ -81,13 +89,13 @@ static UOEventCenter *__eventCenter;
     event.type = type;
     event.userInfo = userInfo;
     
-    [self postNotificationName:NSStringFromClass(object.UOClass) object:event];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NSStringFromClass(object.UOClass) object:event];
 }
 
 #pragma mark - Private
 
 - (void)addEventObserver:(UOEventObserver *)eventObserver {
-    [self addObserver:eventObserver selector:@selector(onEvent:) name:NSStringFromClass(eventObserver.klass) object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:eventObserver selector:@selector(onEvent:) name:NSStringFromClass(eventObserver.klass) object:nil];
     
     NSMutableDictionary *eventObservers = [self eventObserversForTarget:eventObserver.target];
     [eventObservers setObject:eventObserver forKey:eventObserver.key];
@@ -96,7 +104,7 @@ static UOEventCenter *__eventCenter;
 - (void)removeEventObserverForKey:(NSString *)key target:(id)target {
     NSMutableDictionary *eventObservers = [self eventObserversForTarget:target];
     UOEventObserver *eventObserver = eventObservers[key];
-    [self removeObserver:eventObserver name:NSStringFromClass(eventObserver.klass) object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:eventObserver name:NSStringFromClass(eventObserver.klass) object:nil];
     
     [eventObservers removeObjectForKey:key];
 }

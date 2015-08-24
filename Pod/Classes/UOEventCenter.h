@@ -11,7 +11,7 @@
 
 @class UOObject, UOEventObserver;
 
-@interface UOEventCenter : NSNotificationCenter
+@interface UOEventCenter : NSObject
 
 + (UOEventCenter *)eventCenter;
 
@@ -24,6 +24,7 @@
 - (void)removeObserverWithTarget:(id)target block:(UOEventBlock)block object:(UOObject *)object;
 - (void)removeObserverWithTarget:(id)target action:(SEL)action;
 - (void)removeObserverWithTarget:(id)target action:(SEL)action object:(UOObject *)object;
+- (void)removeEventObserver:(UOEventObserver *)eventObserver;
 
 - (void)postEventForObject:(UOObject *)object type:(UOEventType)type;
 - (void)postEventForObject:(UOObject *)object type:(UOEventType)type userInfo:(NSDictionary *)userInfo;

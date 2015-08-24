@@ -21,11 +21,8 @@
     return self;
 }
 
-
 - (void)dealloc {
-    // It's not necessary to remove the observer from the target,
-    // since the observer is associated with the target.
-    [[UOEventCenter eventCenter] removeObserver:self];
+    [[UOEventCenter eventCenter] removeEventObserver:self];
 }
 
 - (void)onEvent:(NSNotification *)notification {

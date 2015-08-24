@@ -28,9 +28,9 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		768CB6888FC627D8BA67A5C1 /* Pods_UltraObject_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D43740367B2FF6937301AFA /* Pods_UltraObject_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6654E74393C30A72603B90AF /* libPods-UltraObject_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE58A6E6EC901EA6CFFE1AE /* libPods-UltraObject_Example.a */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		E3985A8178033F94E07CBAB9 /* Pods_UltraObject_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FF903E3A7EBCFCB98E3A5FC /* Pods_UltraObject_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9A1EAE49E31349DCCF9D77BC /* libPods-UltraObject_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7139F7467DEAED026DCC77C1 /* libPods-UltraObject_Tests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +60,7 @@
 		1AE30D271B73557300DB7DBD /* UOComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOComment.h; sourceTree = "<group>"; };
 		1AE30D281B73557300DB7DBD /* UOComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOComment.m; sourceTree = "<group>"; };
 		1AE30D2A1B73566700DB7DBD /* PostTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTests.m; sourceTree = "<group>"; };
-		3D43740367B2FF6937301AFA /* Pods_UltraObject_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UltraObject_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		481C1A56AE5EFFFBD2F07B29 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		5FF903E3A7EBCFCB98E3A5FC /* Pods_UltraObject_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UltraObject_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* UltraObject_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltraObject_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -80,12 +78,14 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		7139F7467DEAED026DCC77C1 /* libPods-UltraObject_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UltraObject_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C608E76612324A749D09BB2F /* Pods-UltraObject_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UltraObject_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UltraObject_Tests/Pods-UltraObject_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D167EF02A297F8A97A2D3424 /* Pods-UltraObject_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UltraObject_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UltraObject_Example/Pods-UltraObject_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D6E45645546D473DF1E269D7 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		E2C2687EDF83107B6ADDC212 /* Pods-UltraObject_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UltraObject_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-UltraObject_Example/Pods-UltraObject_Example.release.xcconfig"; sourceTree = "<group>"; };
 		EC247ABF85D07B25F87C1866 /* Pods-UltraObject_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UltraObject_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UltraObject_Tests/Pods-UltraObject_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		ECE58A6E6EC901EA6CFFE1AE /* libPods-UltraObject_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UltraObject_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF645D821C3AB4EC8B4EC876 /* UltraObject.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = UltraObject.podspec; path = ../UltraObject.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +97,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				768CB6888FC627D8BA67A5C1 /* Pods_UltraObject_Example.framework in Frameworks */,
+				6654E74393C30A72603B90AF /* libPods-UltraObject_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +108,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				E3985A8178033F94E07CBAB9 /* Pods_UltraObject_Tests.framework in Frameworks */,
+				9A1EAE49E31349DCCF9D77BC /* libPods-UltraObject_Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,8 +154,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				3D43740367B2FF6937301AFA /* Pods_UltraObject_Example.framework */,
-				5FF903E3A7EBCFCB98E3A5FC /* Pods_UltraObject_Tests.framework */,
+				ECE58A6E6EC901EA6CFFE1AE /* libPods-UltraObject_Example.a */,
+				7139F7467DEAED026DCC77C1 /* libPods-UltraObject_Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -240,7 +240,6 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				F9BD22FE7837F2EAFB3E7932 /* Embed Pods Frameworks */,
 				98F80AA9F5A5137328CB4A93 /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -260,7 +259,6 @@
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				BBD28CDFCC35EB1618A3AE59 /* Embed Pods Frameworks */,
 				5986B523289EA6024D7E04EA /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -387,36 +385,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UltraObject_Example/Pods-UltraObject_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BBD28CDFCC35EB1618A3AE59 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UltraObject_Tests/Pods-UltraObject_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F9BD22FE7837F2EAFB3E7932 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UltraObject_Example/Pods-UltraObject_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

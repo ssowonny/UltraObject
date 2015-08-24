@@ -41,7 +41,7 @@ describe(@"UOEventCenter", ^{
         }];
         
         [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
-        expect(eventBlockPerformed).to.beTruthy;
+        expect(eventBlockPerformed).to.beTruthy();
     });
     
     it(@"should receive proper event type", ^{
@@ -71,7 +71,7 @@ describe(@"UOEventCenter", ^{
         
         target = nil;
         [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
-        expect(eventBlockPerformed).to.beFalsy;
+        expect(eventBlockPerformed).to.beFalsy();
     });
     
     it(@"should not perform other object's observing block", ^{
@@ -84,7 +84,7 @@ describe(@"UOEventCenter", ^{
         }];
         
         [[UOEventCenter eventCenter] postEventForObject:otherPost type:UOEventTypeUpdate];
-        expect(eventBlockPerformed).to.beFalsy;
+        expect(eventBlockPerformed).to.beFalsy();
     });
     
     it(@"should reuse observing blocks", ^{
@@ -131,7 +131,7 @@ describe(@"UOEventCenter", ^{
             [post edit:^(UOMutablePost *mutablePost) {
                 mutablePost.content = @"New content";
             }];
-            expect(eventBlockPerformed).to.beTruthy;
+            expect(eventBlockPerformed).to.beTruthy();
         });
     });
     
