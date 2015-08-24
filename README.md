@@ -1,6 +1,6 @@
 # UltraObject
 
-[![CI Status](http://img.shields.io/travis/Sungwon Lee/UltraObject.svg?style=flat)](https://travis-ci.org/ssowonny/UltraObject)
+[![CI Status](http://img.shields.io/travis/ssowonny/UltraObject.svg?style=flat)](https://travis-ci.org/ssowonny/UltraObject)
 [![Version](https://img.shields.io/cocoapods/v/UltraObject.svg?style=flat)](http://cocoapods.org/pods/UltraObject)
 [![License](https://img.shields.io/cocoapods/l/UltraObject.svg?style=flat)](http://cocoapods.org/pods/UltraObject)
 [![Platform](https://img.shields.io/cocoapods/p/UltraObject.svg?style=flat)](http://cocoapods.org/pods/UltraObject)
