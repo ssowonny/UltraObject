@@ -11,4 +11,5 @@
 @protocol UOMutableObject <NSObject>
 @optional
 - (void)synchronize;
+- (void)synchronizeWithObject:(UOObject *)object;
 @end

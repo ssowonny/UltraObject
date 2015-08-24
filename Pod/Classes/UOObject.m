@@ -108,7 +108,7 @@
 - (void)edit:(UOEditBlock)block {
     UOObject<UOMutableObject> *mutableObject = [self mutableCopy];
     block(mutableObject);
-    [mutableObject synchronize];
+    [mutableObject synchronizeWithObject:self];
 }
 
 - (void)destroy {
