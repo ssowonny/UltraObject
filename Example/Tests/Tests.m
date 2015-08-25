@@ -25,6 +25,14 @@ describe(@"UOTestObject", ^{
         expect(testObject).to.equal(sameObject);
         expect(testObject).toNot.equal(otherObject);
     });
+    
+    it(@"should return overriden id key", ^{
+        expect(UOObject.idKey).to.equal(@"id");
+        expect(UOTestObject.idKey).to.equal(@"_id");
+        
+        Class klass = UOTestObject.class;
+        expect([klass performSelector:@selector(idKey)]).to.equal(UOTestObject.idKey);
+    });
 });
 
 describe(@"UOObjectManager", ^{

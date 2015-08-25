@@ -25,6 +25,8 @@ typedef void (^UOEditBlock)(id<UOMutableObject>);
 @interface UOObject : JSONModel<NSCopying, NSMutableCopying>
 @property (nonatomic, readonly) UOID id;
 
++ (NSString *)idKey;
+
 + (instancetype)objectWithID:(UOID)ID;
 + (instancetype)objectWithJSON:(NSDictionary *)json;
 + (instancetype)new:(NSDictionary *)json;

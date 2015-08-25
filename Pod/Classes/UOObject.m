@@ -20,6 +20,10 @@
 @implementation UOObject
 @synthesize id;
 
++ (NSString *)idKey {
+    return UOObjectIDKey;
+}
+
 + (instancetype)objectWithJSON:(NSDictionary *)json {
     return [[UOObjectManager sharedManager] objectWithClass:self.UOClass forJSON:json];
 }
@@ -51,7 +55,8 @@
 }
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err {
-    UOID ID = dict[UOObjectIDKey];
+    NSString *idKey = [self.class performSelector:@selector(idKey)];
+    UOID ID = dict[idKey];
     if (!ID) {
         return [super initWithDictionary:dict error:err];
     }

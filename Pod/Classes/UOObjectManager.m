@@ -46,7 +46,7 @@ static UOObjectManager *__sharedManager;
     return _mutableClasses[NSStringFromClass(klass)];
 }
 
-- (id)objectWithClass:(Class)klass forID:(UOID)ID {
+- (id)objectWithClass:(Class)klass forID:(UOID)ID { @synchronized(self) {
     NSMutableDictionary *objects = [self dictionaryForClass:klass];
     NSValue *value = objects[ID];
     UOObject *object = [value nonretainedObjectValue];
@@ -56,17 +56,18 @@ static UOObjectManager *__sharedManager;
     }
     
     return object;
-}
+} }
 
-- (void)removeObject:(UOObject *)object {
+- (void)removeObject:(UOObject *)object { @synchronized(self) {
     NSMutableDictionary *objects = [self dictionaryForClass:object.UOClass];
     if (object.id && [objects[object.id] nonretainedObjectValue] == object) {
         [objects removeObjectForKey:object.id];
     }
-}
+} }
 
 - (id)objectWithClass:(Class)klass forJSON:(NSDictionary *)json {
-    UOID ID = json[UOObjectIDKey];
+    NSString *idKey = [klass performSelector:@selector(idKey)];
+    UOID ID = json[idKey];
     UOObject* object = [self objectWithClass:klass forID:ID];
     [object importDictionary:json];
     return object;

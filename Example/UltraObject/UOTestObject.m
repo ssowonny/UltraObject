@@ -9,6 +9,11 @@
 #import "UOTestObject.h"
 
 @implementation UOTestObject
+
++ (NSString *)idKey {
+    return @"_id";
+}
+
 @end
 
 @implementation UOMutableTestObject
