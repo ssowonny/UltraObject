@@ -8,6 +8,10 @@
 
 #import "UOTestObject.h"
 
+@interface UOTestObject ()
+@property (nonatomic, strong) NSNumber *_id;
+@end
+
 @implementation UOTestObject
 
 + (NSString *)idKey {

@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Sungwon Lee. All rights reserved.
 //
 
-#import <UltraObject/UltraObject.h>
+#import "UOBaseObject.h"
 
-@interface UOUser : UOObject
+@interface UOUser : UOBaseObject
 @property (nonatomic, readonly) NSString *name;
 @end
 

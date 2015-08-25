@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Sungwon Lee. All rights reserved.
 //
 
-#import <UltraObject/UltraObject.h>
+#import "UOBaseObject.h"
 
 @class UOUser;
 @protocol UOComment;
 
-@interface UOPost : UOObject
+@interface UOPost : UOBaseObject
 @property (nonatomic, readonly) UOUser *user;
 @property (nonatomic, readonly) NSString *content;
 @property (nonatomic, readonly) NSArray<UOComment> *comments;

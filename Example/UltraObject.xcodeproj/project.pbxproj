@@ -16,6 +16,7 @@
 		1AE30D221B7353B700DB7DBD /* UOPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D211B7353B700DB7DBD /* UOPost.m */; };
 		1AE30D251B7353C100DB7DBD /* UOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D241B7353C100DB7DBD /* UOUser.m */; };
 		1AE30D291B73557300DB7DBD /* UOComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D281B73557300DB7DBD /* UOComment.m */; };
+		1AEE0D5B1B8C434A0034B925 /* UOBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEE0D5A1B8C434A0034B925 /* UOBaseObject.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -60,6 +61,8 @@
 		1AE30D271B73557300DB7DBD /* UOComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOComment.h; sourceTree = "<group>"; };
 		1AE30D281B73557300DB7DBD /* UOComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOComment.m; sourceTree = "<group>"; };
 		1AE30D2A1B73566700DB7DBD /* PostTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTests.m; sourceTree = "<group>"; };
+		1AEE0D591B8C434A0034B925 /* UOBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOBaseObject.h; sourceTree = "<group>"; };
+		1AEE0D5A1B8C434A0034B925 /* UOBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOBaseObject.m; sourceTree = "<group>"; };
 		481C1A56AE5EFFFBD2F07B29 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* UltraObject_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltraObject_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -174,6 +177,8 @@
 				1AB62C151B82F2B2007AF618 /* UOEditViewController.m */,
 				1A6CEFE11B70639D007B5A78 /* UOTestObject.h */,
 				1A6CEFE21B70639D007B5A78 /* UOTestObject.m */,
+				1AEE0D591B8C434A0034B925 /* UOBaseObject.h */,
+				1AEE0D5A1B8C434A0034B925 /* UOBaseObject.m */,
 				1AE30D201B7353B700DB7DBD /* UOPost.h */,
 				1AE30D211B7353B700DB7DBD /* UOPost.m */,
 				1AE30D231B7353C100DB7DBD /* UOUser.h */,
@@ -401,6 +406,7 @@
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				1AE30D291B73557300DB7DBD /* UOComment.m in Sources */,
 				1AE30D251B7353C100DB7DBD /* UOUser.m in Sources */,
+				1AEE0D5B1B8C434A0034B925 /* UOBaseObject.m in Sources */,
 				1AE30D221B7353B700DB7DBD /* UOPost.m in Sources */,
 				1AB62C161B82F2B3007AF618 /* UOEditViewController.m in Sources */,
 			);

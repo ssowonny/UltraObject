@@ -46,7 +46,22 @@ static UOObjectManager *__sharedManager;
     return _mutableClasses[NSStringFromClass(klass)];
 }
 
+- (id)objectWithClass:(Class)klass forJSON:(NSDictionary *)json {
+    NSString *idKey = [klass performSelector:@selector(idKey)];
+    UOObject *object = nil;
+    if (idKey) {
+        UOID ID = json[idKey];
+        object = [self objectWithClass:klass forID:ID];
+    } else {
+        object = [klass new];
+    }
+    [object importDictionary:json];
+    return object;
+}
+
 - (id)objectWithClass:(Class)klass forID:(UOID)ID { @synchronized(self) {
+    NSAssert(ID, @"`ID` shouldn't be nil for classes that have `idKey`.");
+    
     NSMutableDictionary *objects = [self dictionaryForClass:klass];
     NSValue *value = objects[ID];
     UOObject *object = [value nonretainedObjectValue];
@@ -60,18 +75,10 @@ static UOObjectManager *__sharedManager;
 
 - (void)removeObject:(UOObject *)object { @synchronized(self) {
     NSMutableDictionary *objects = [self dictionaryForClass:object.UOClass];
-    if (object.id && [objects[object.id] nonretainedObjectValue] == object) {
-        [objects removeObjectForKey:object.id];
+    if (object.__id && [[objects[object.__id] nonretainedObjectValue] isEqual:object]) {
+        [objects removeObjectForKey:object.__id];
     }
 } }
-
-- (id)objectWithClass:(Class)klass forJSON:(NSDictionary *)json {
-    NSString *idKey = [klass performSelector:@selector(idKey)];
-    UOID ID = json[idKey];
-    UOObject* object = [self objectWithClass:klass forID:ID];
-    [object importDictionary:json];
-    return object;
-}
 
 #pragma mark - Private
 

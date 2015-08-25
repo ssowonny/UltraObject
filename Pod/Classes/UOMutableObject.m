@@ -14,7 +14,7 @@
 @implementation UOObject (UOMutableObject)
 
 - (void)synchronize {
-    UOObject *object = [[UOObjectManager sharedManager] objectWithClass:self.UOClass forID:self.id];
+    UOObject *object = [[UOObjectManager sharedManager] objectWithClass:self.UOClass forID:self.__id];
     [self synchronizeWithObject:object];
 }
 

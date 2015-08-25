@@ -27,7 +27,7 @@ describe(@"UOTestObject", ^{
     });
     
     it(@"should return overriden id key", ^{
-        expect(UOObject.idKey).to.equal(@"id");
+        expect(UOObject.idKey).to.equal(nil);
         expect(UOTestObject.idKey).to.equal(@"_id");
         
         Class klass = UOTestObject.class;

@@ -14,14 +14,22 @@
 #import "UOMutableObject.h"
 
 @interface UOObject ()
-@property (nonatomic, strong) UOID id;
+@property (nonatomic, strong) UOID __id;
 @end
 
 @implementation UOObject
-@synthesize id;
+@synthesize __id;
 
 + (NSString *)idKey {
-    return UOObjectIDKey;
+    return nil;
+}
+
+- (UOID)__id {
+    if (!__id) {
+        NSString *idKey = self.class.idKey;
+        __id = idKey ? [self performSelector:NSSelectorFromString(idKey)] : nil;
+    }
+    return __id;
 }
 
 + (instancetype)objectWithJSON:(NSDictionary *)json {
@@ -139,7 +147,7 @@
 - (instancetype)initWithID:(UOID)ID {
     self = [super init];
     if (self) {
-        self.id = ID;
+        self.__id = ID;
     }
     return self;
 }
