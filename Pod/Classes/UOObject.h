@@ -28,6 +28,7 @@ typedef void (^UOEditBlock)(id<UOMutableObject>);
 
 + (instancetype)objectWithID:(UOID)ID;
 + (instancetype)objectWithJSON:(NSDictionary *)json;
++ (NSArray *)objectsWithJSONArray:(NSArray *)jsonArray;
 + (instancetype)new:(NSDictionary *)json;
 
 + (void)addObserverWithTarget:(id)target block:(UOEventBlock)block;

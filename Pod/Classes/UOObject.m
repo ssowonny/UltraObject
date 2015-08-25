@@ -25,11 +25,17 @@
 }
 
 - (UOID)__id {
-    if (!__id) {
-        NSString *idKey = self.class.idKey;
-        __id = idKey ? [self performSelector:NSSelectorFromString(idKey)] : nil;
+    NSString *idKey = nil;
+    if (!__id && (idKey = self.class.idKey)) {
+        IMP imp = [self methodForSelector:NSSelectorFromString(idKey)];
+        UOID (*func)(id) = (void *)imp;
+        __id = func(self);
     }
     return __id;
+}
+
++ (NSArray *)objectsWithJSONArray:(NSArray *)jsonArray {
+    return [self.class arrayOfModelsFromDictionaries:jsonArray];
 }
 
 + (instancetype)objectWithJSON:(NSDictionary *)json {

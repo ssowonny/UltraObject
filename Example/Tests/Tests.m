@@ -33,6 +33,11 @@ describe(@"UOTestObject", ^{
         Class klass = UOTestObject.class;
         expect([klass performSelector:@selector(idKey)]).to.equal(UOTestObject.idKey);
     });
+    
+    it(@"should create objects from json array", ^{
+        NSArray *testObjects = [UOTestObject objectsWithJSONArray:@[@{@"_id": @1}, @{@"_id": @2}]];
+        expect(testObjects.firstObject).to.beAKindOf(UOTestObject.class);
+    });
 });
 
 describe(@"UOObjectManager", ^{
