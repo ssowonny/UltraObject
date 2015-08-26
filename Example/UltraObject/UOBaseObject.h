@@ -9,5 +9,5 @@
 #import <UltraObject.h>
 
 @interface UOBaseObject : UOObject
-@property (nonatomic, readonly) NSNumber *id;
+@property (nonatomic, readonly) NSNumber<UOIdentifier> *id;
 @end

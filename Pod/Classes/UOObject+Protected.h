@@ -9,6 +9,9 @@
 #import "UOObject.h"
 
 @interface UOObject (Protected)
+@property (nonatomic, readonly) UOID __id;
+
++ (NSString *)__idKey;
 + (Class)UOClass;
 
 - (Class)UOClass;

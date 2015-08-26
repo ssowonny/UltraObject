@@ -49,7 +49,7 @@ static UOObjectManager *__sharedManager;
 - (id)objectWithClass:(Class)klass forJSON:(NSDictionary *)json {
     UOID ID;
     UOObject *object;
-    NSString *idKey = [klass performSelector:@selector(idKey)];
+    NSString *idKey = [klass performSelector:@selector(__idKey)];
     if (idKey && (ID = json[idKey])) {
         object = [self objectWithClass:klass forID:ID];
     } else {

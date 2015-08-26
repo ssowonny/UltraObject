@@ -9,15 +9,10 @@
 #import "UOTestObject.h"
 
 @interface UOTestObject ()
-@property (nonatomic, strong) NSNumber *_id;
+@property (nonatomic, strong) NSNumber<UOIdentifier> *_id;
 @end
 
 @implementation UOTestObject
-
-+ (NSString *)idKey {
-    return @"_id";
-}
-
 @end
 
 @implementation UOMutableTestObject

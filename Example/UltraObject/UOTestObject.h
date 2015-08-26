@@ -13,7 +13,7 @@
 @end
 
 @interface UOTestObject : UOObject
-@property (nonatomic, readonly) NSNumber *_id;
+@property (nonatomic, readonly) NSNumber<UOIdentifier> *_id;
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *phoneNumber;
 @property (nonatomic, readonly) NSArray<UOTestObject> *testObjects;

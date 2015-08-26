@@ -9,7 +9,9 @@
 // https://github.com/Specta/Specta
 
 #import "UOTestObject.h"
+#import "UOSimpleObject.h"
 #import "UOObjectManager.h"
+#import <UltraObject/UOObject+Protected.h>
 
 SpecBegin(InitialSpecs)
 
@@ -27,11 +29,11 @@ describe(@"UOTestObject", ^{
     });
     
     it(@"should return overriden id key", ^{
-        expect(UOObject.idKey).to.equal(nil);
-        expect(UOTestObject.idKey).to.equal(@"_id");
+        expect(UOObject.__idKey).to.equal(nil);
+        expect(UOTestObject.__idKey).to.equal(@"_id");
         
         Class klass = UOTestObject.class;
-        expect([klass performSelector:@selector(idKey)]).to.equal(UOTestObject.idKey);
+        expect([klass performSelector:@selector(__idKey)]).to.equal(UOTestObject.__idKey);
     });
     
     it(@"should create objects from json array", ^{
@@ -42,7 +44,13 @@ describe(@"UOTestObject", ^{
 
 describe(@"UOObjectManager", ^{
     it(@"should create object manager", ^{
-        expect([UOObjectManager new]).toNot.beNil;
+        expect([UOObjectManager new]).toNot.beNil();
+    });
+});
+
+describe(@"UOSimpleObject", ^{
+    it(@"should not have internal id", ^{
+        expect([UOSimpleObject new].__id).to.beNil();
     });
 });
 

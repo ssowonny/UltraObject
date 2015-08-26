@@ -18,13 +18,11 @@
 #define UOObjectIDType id<NSCoding, NSCopying, Optional>
 #endif
 
-@protocol UOMutableObject;
+@protocol UOMutableObject, UOIdentifier, UONoIdentifier;
 typedef UOObjectIDType UOID;
 typedef void (^UOEditBlock)(id<UOMutableObject>);
 
 @interface UOObject : JSONModel<NSCopying, NSMutableCopying>
-@property (nonatomic, readonly) UOID __id;
-+ (NSString *)idKey;
 
 + (instancetype)objectWithID:(UOID)ID;
 + (instancetype)objectWithJSON:(NSDictionary *)json;
@@ -49,4 +47,10 @@ typedef void (^UOEditBlock)(id<UOMutableObject>);
 - (void)edit:(UOEditBlock)block;
 - (void)destroy;
 
+@end
+
+@protocol UOIdentifier <NSObject>
+@end
+
+@protocol UONoIdentifier <NSObject>
 @end

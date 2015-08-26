@@ -12,44 +12,51 @@
 #import "UOObject+Protected.h"
 #import "UOObject+JSONModel.h"
 #import "UOMutableObject.h"
+#import <JSONModel/JSONKeyMapper.h>
+#import <objc/runtime.h>
+
+static NSMutableDictionary *__idProperties;
 
 @interface UOObject ()
 @property (nonatomic, strong) UOID __id;
++ (NSString *)__idProperty;
 @end
 
 @implementation UOObject
 @synthesize __id;
 
-+ (NSString *)idKey {
-    return nil;
-}
-
 - (UOID)__id {
-    NSString *idKey = nil;
-    if (!__id && (idKey = self.class.idKey)) {
-        NSAssert([self respondsToSelector:NSSelectorFromString(idKey)],
-                 ([NSString stringWithFormat:@"`%@` should be implemented.", idKey, nil]));
+    if (!__id && self.class.__idProperty) {
+        NSString *getter = self.class.__idProperty;
+        NSAssert([self respondsToSelector:NSSelectorFromString(getter)],
+                 ([NSString stringWithFormat:@"`%@` should be implemented.", getter, nil]));
         
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        __id = [self performSelector:NSSelectorFromString(idKey)];
+        __id = [self performSelector:NSSelectorFromString(getter)];
 #pragma clang diagnostic pop
     }
+    
     return __id;
 }
 
 - (void)set__id:(UOID)ID {
-    NSString *idKey = self.class.idKey;
-    if (idKey) {
-        NSString *setter = [NSString stringWithFormat:@"set%@:", [idKey capitalizedString]];
-        NSAssert([self respondsToSelector:NSSelectorFromString(setter)],
-                 ([NSString stringWithFormat:@"`%@` should be implemented.", setter, nil]));
-        
+    NSAssert(!__id, @"Identifier shouldn't be modified.");
+    
+    if (!self.class.__idProperty) {
+        return;
+    }
+    
+    NSString *firstName = [self.class.__idProperty stringByReplacingCharactersInRange:NSMakeRange(0,1)
+                                                                     withString:[[self.class.__idProperty substringToIndex:1] uppercaseString]];
+    NSString *setter = [NSString stringWithFormat:@"set%@:", firstName];
+    NSAssert([self respondsToSelector:NSSelectorFromString(setter)],
+             ([NSString stringWithFormat:@"`%@` should be implemented.", setter, nil]));
+    
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self performSelector:NSSelectorFromString(setter) withObject:ID];
+    [self performSelector:NSSelectorFromString(setter) withObject:ID];
 #pragma clang diagnostic pop
-    }
 }
 
 + (NSArray *)objectsWithJSONArray:(NSArray *)jsonArray {
@@ -87,9 +94,9 @@
 }
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err {
-    NSString *idKey = [self.class performSelector:@selector(idKey)];
-    UOID ID = dict[idKey];
-    if (!ID) {
+    UOID ID = nil;
+    NSString *idKey = self.class.__idKey;
+    if (!idKey || !(ID = dict[idKey])) {
         return [super initWithDictionary:dict error:err];
     }
     
@@ -154,6 +161,45 @@
 
 #pragma mark - Private methods
 
++ (NSString *)__idProperty {
+    if (!__idProperties) {
+        __idProperties = [NSMutableDictionary new];
+    }
+    
+    NSString *className = NSStringFromClass(self);
+    NSString *idProperty = __idProperties[className];
+    
+    if (!idProperty) {
+        Class class = self.class;
+        while (class != [UOObject class] && !idProperty) {
+            unsigned int propertyCount;
+            objc_property_t *properties = class_copyPropertyList(class, &propertyCount);
+            
+            for (unsigned int i = 0; i < propertyCount; i++) {
+                objc_property_t property = properties[i];
+                const char *attrs = property_getAttributes(property);
+                NSString* propertyAttributes = @(attrs);
+                if ([propertyAttributes containsString:@"<UOIdentifier>"]
+                    && ![propertyAttributes containsString:@"<UONoIdentifier>"]) {
+                    const char *propertyName = property_getName(property);
+                    idProperty = @(propertyName);
+                    break;
+                }
+            }
+            
+            free(properties);
+            class = [class superclass];
+        }
+        
+        if (!idProperty) {
+            idProperty = (id)[NSNull null];
+        }
+        __idProperties[className] = idProperty;
+    }
+    
+    return idProperty == (id)[NSNull null] ? nil : idProperty;
+}
+
 @end
 
 @implementation UOObject (Protected)
@@ -161,6 +207,22 @@
 + (Class)UOClass {
     return [self conformsToProtocol:@protocol(UOMutableObject)]
         ? self.superclass : self;
+}
+
++ (NSString *)__idKey {
+    NSString *idProperty = self.__idProperty;
+    if (!idProperty) {
+        return nil;
+    }
+    
+    JSONKeyMapper *keyMapper = self.keyMapper;
+    if (keyMapper) {
+        return [keyMapper convertValue:idProperty isImportingToModel:NO];
+    }
+    
+#warning TODO Support global mapper
+    
+    return idProperty;
 }
 
 - (Class)UOClass {

@@ -9,11 +9,8 @@
 #import "UOBaseObject.h"
 
 @interface UOBaseObject ()
-@property (nonatomic, strong) NSNumber *id;
+@property (nonatomic, strong) NSNumber<UOIdentifier> *id;
 @end
 
 @implementation UOBaseObject
-+ (NSString *)idKey {
-    return @"id";
-}
 @end
