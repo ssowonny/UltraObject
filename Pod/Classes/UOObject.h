@@ -10,10 +10,6 @@
 #import <JSONModel/JSONModel.h>
 #import "UOEventCenter.h"
 
-#ifndef UOObjectIDKey
-#define UOObjectIDKey @"id"
-#endif
-
 #ifndef UOObjectIDType
 #define UOObjectIDType id<NSCoding, NSCopying, Optional>
 #endif
@@ -47,10 +43,4 @@ typedef void (^UOEditBlock)(id<UOMutableObject>);
 - (void)edit:(UOEditBlock)block;
 - (void)destroy;
 
-@end
-
-@protocol UOIdentifier <NSObject>
-@end
-
-@protocol UONoIdentifier <NSObject>
 @end

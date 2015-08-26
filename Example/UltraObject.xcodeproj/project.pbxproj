@@ -14,6 +14,8 @@
 		1AB62C161B82F2B3007AF618 /* UOEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB62C151B82F2B2007AF618 /* UOEditViewController.m */; };
 		1AB961521B73579500C970C7 /* PostTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D2A1B73566700DB7DBD /* PostTests.m */; };
 		1ADD38481B8DBF7700AEEA44 /* UOSimpleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD38471B8DBF7700AEEA44 /* UOSimpleObject.m */; };
+		1ADD384B1B8DC15F00AEEA44 /* UOTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD384A1B8DC15F00AEEA44 /* UOTag.m */; };
+		1ADD384E1B8DC21200AEEA44 /* TagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD384C1B8DC20500AEEA44 /* TagTests.m */; };
 		1AE30D221B7353B700DB7DBD /* UOPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D211B7353B700DB7DBD /* UOPost.m */; };
 		1AE30D251B7353C100DB7DBD /* UOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D241B7353C100DB7DBD /* UOUser.m */; };
 		1AE30D291B73557300DB7DBD /* UOComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE30D281B73557300DB7DBD /* UOComment.m */; };
@@ -57,6 +59,9 @@
 		1AB62C151B82F2B2007AF618 /* UOEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOEditViewController.m; sourceTree = "<group>"; };
 		1ADD38461B8DBF7700AEEA44 /* UOSimpleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOSimpleObject.h; sourceTree = "<group>"; };
 		1ADD38471B8DBF7700AEEA44 /* UOSimpleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOSimpleObject.m; sourceTree = "<group>"; };
+		1ADD38491B8DC15F00AEEA44 /* UOTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOTag.h; sourceTree = "<group>"; };
+		1ADD384A1B8DC15F00AEEA44 /* UOTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOTag.m; sourceTree = "<group>"; };
+		1ADD384C1B8DC20500AEEA44 /* TagTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagTests.m; sourceTree = "<group>"; };
 		1AE30D201B7353B700DB7DBD /* UOPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOPost.h; sourceTree = "<group>"; };
 		1AE30D211B7353B700DB7DBD /* UOPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UOPost.m; sourceTree = "<group>"; };
 		1AE30D231B7353C100DB7DBD /* UOUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UOUser.h; sourceTree = "<group>"; };
@@ -188,6 +193,8 @@
 				1AE30D241B7353C100DB7DBD /* UOUser.m */,
 				1AE30D271B73557300DB7DBD /* UOComment.h */,
 				1AE30D281B73557300DB7DBD /* UOComment.m */,
+				1ADD38491B8DC15F00AEEA44 /* UOTag.h */,
+				1ADD384A1B8DC15F00AEEA44 /* UOTag.m */,
 				1ADD38461B8DBF7700AEEA44 /* UOSimpleObject.h */,
 				1ADD38471B8DBF7700AEEA44 /* UOSimpleObject.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -213,6 +220,7 @@
 			children = (
 				6003F5BB195388D20070C39A /* Tests.m */,
 				1AE30D2A1B73566700DB7DBD /* PostTests.m */,
+				1ADD384C1B8DC20500AEEA44 /* TagTests.m */,
 				1A9F29551B8189EC008D123A /* EventTests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
@@ -410,6 +418,7 @@
 				1AB62C101B81E8AD007AF618 /* UOPostViewController.m in Sources */,
 				1AB62C131B82BDD0007AF618 /* UOPostsViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				1ADD384B1B8DC15F00AEEA44 /* UOTag.m in Sources */,
 				1AE30D291B73557300DB7DBD /* UOComment.m in Sources */,
 				1AE30D251B7353C100DB7DBD /* UOUser.m in Sources */,
 				1AEE0D5B1B8C434A0034B925 /* UOBaseObject.m in Sources */,
@@ -422,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ADD384E1B8DC21200AEEA44 /* TagTests.m in Sources */,
 				1AB961521B73579500C970C7 /* PostTests.m in Sources */,
 				1A9F29571B8189F6008D123A /* EventTests.m in Sources */,
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,

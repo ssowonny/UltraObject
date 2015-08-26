@@ -220,7 +220,7 @@ static NSMutableDictionary *__idProperties;
         return [keyMapper convertValue:idProperty isImportingToModel:NO];
     }
     
-#warning TODO Support global mapper
+    // TODO Should support global key mapper
     
     return idProperty;
 }
@@ -242,4 +242,10 @@ static NSMutableDictionary *__idProperties;
     return [self __importDictionary:dict withKeyMapper:self.__keyMapper validation:NO error:nil];
 }
 
+@end
+
+@protocol UOIdentifier <NSObject>
+@end
+
+@protocol UONoIdentifier <NSObject>
 @end
