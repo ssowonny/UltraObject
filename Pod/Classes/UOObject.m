@@ -27,11 +27,29 @@
 - (UOID)__id {
     NSString *idKey = nil;
     if (!__id && (idKey = self.class.idKey)) {
-        IMP imp = [self methodForSelector:NSSelectorFromString(idKey)];
-        UOID (*func)(id) = (void *)imp;
-        __id = func(self);
+        NSString *assert = [NSString stringWithFormat:@"`%@` should be implemented.", idKey, nil];
+        NSAssert([self respondsToSelector:NSSelectorFromString(idKey)], assert);
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        __id = [self performSelector:NSSelectorFromString(idKey)];
+#pragma clang diagnostic pop
     }
     return __id;
+}
+
+- (void)set__id:(UOID)ID {
+    NSString *idKey = self.class.idKey;
+    if (idKey) {
+        NSString *setter = [NSString stringWithFormat:@"set%@:", [idKey capitalizedString]];
+        NSString *assert= [NSString stringWithFormat:@"`%@` should be implemented.", setter, nil];
+        NSAssert([self respondsToSelector:NSSelectorFromString(setter)], assert);
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self performSelector:NSSelectorFromString(setter) withObject:ID];
+#pragma clang diagnostic pop
+    }
 }
 
 + (NSArray *)objectsWithJSONArray:(NSArray *)jsonArray {
