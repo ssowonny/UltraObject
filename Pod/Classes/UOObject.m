@@ -27,8 +27,8 @@
 - (UOID)__id {
     NSString *idKey = nil;
     if (!__id && (idKey = self.class.idKey)) {
-        NSString *assert = [NSString stringWithFormat:@"`%@` should be implemented.", idKey, nil];
-        NSAssert([self respondsToSelector:NSSelectorFromString(idKey)], assert);
+        NSAssert([self respondsToSelector:NSSelectorFromString(idKey)],
+                 ([NSString stringWithFormat:@"`%@` should be implemented.", idKey, nil]));
         
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -42,8 +42,8 @@
     NSString *idKey = self.class.idKey;
     if (idKey) {
         NSString *setter = [NSString stringWithFormat:@"set%@:", [idKey capitalizedString]];
-        NSString *assert= [NSString stringWithFormat:@"`%@` should be implemented.", setter, nil];
-        NSAssert([self respondsToSelector:NSSelectorFromString(setter)], assert);
+        NSAssert([self respondsToSelector:NSSelectorFromString(setter)],
+                 ([NSString stringWithFormat:@"`%@` should be implemented.", setter, nil]));
         
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
