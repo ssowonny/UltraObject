@@ -164,7 +164,7 @@ describe(@"UOEventCenter", ^{
         it(@"should call action selector", ^{
             UOPost *post = [UOPost objectWithID:@1];
             UOTargetWithAction *target = [UOTargetWithAction new];
-            [post addObservingTarget:target action:@selector(onEvent:)];
+            [post addObserverTarget:target action:@selector(onEvent:)];
             
             [[UOEventCenter eventCenter] postEventForObject:post type:UOEventTypeUpdate];
             expect(target.callCount).to.equal(1);

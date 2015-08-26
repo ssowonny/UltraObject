@@ -20,10 +20,10 @@
 
 - (void)setPost:(UOPost *)post {
     if (_post) {
-        [_post removeObservingTarget:self action:@selector(onPostEvent:)];
+        [_post removeObserverTarget:self action:@selector(onPostEvent:)];
     }
     _post = post;
-    [_post addObservingTarget:self action:@selector(onPostEvent:)];
+    [_post addObserverTarget:self action:@selector(onPostEvent:)];
 }
 
 - (void)viewDidLoad {

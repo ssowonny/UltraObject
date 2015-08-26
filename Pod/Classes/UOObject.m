@@ -133,11 +133,11 @@ static NSMutableDictionary *__idProperties;
     [[UOEventCenter eventCenter] removeObserverWithTarget:target block:block object:self];
 }
 
-- (void)addObservingTarget:(id)target action:(SEL)action {
+- (void)addObserverTarget:(id)target action:(SEL)action {
     [[UOEventCenter eventCenter] addObserverWithTarget:target action:action object:self];
 }
 
-- (void)removeObservingTarget:(id)target action:(SEL)action {
+- (void)removeObserverTarget:(id)target action:(SEL)action {
     [[UOEventCenter eventCenter] removeObserverWithTarget:target action:action object:self];
 }
 

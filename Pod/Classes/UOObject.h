@@ -34,8 +34,8 @@ typedef void (^UOEditBlock)(id<UOMutableObject>);
 - (void)addObserverWithTarget:(id)target block:(UOEventBlock)block;
 - (void)removeObserverWithTarget:(id)target block:(UOEventBlock)block;
 
-- (void)addObservingTarget:(id)target action:(SEL)action;
-- (void)removeObservingTarget:(id)target action:(SEL)action;
+- (void)addObserverTarget:(id)target action:(SEL)action;
+- (void)removeObserverTarget:(id)target action:(SEL)action;
 
 - (void)postEventWithType:(UOEventType)type;
 - (void)postEventWithType:(UOEventType)type userInfo:(NSDictionary *)userInfo;
