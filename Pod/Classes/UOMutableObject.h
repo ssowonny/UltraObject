@@ -10,6 +10,6 @@
 
 @protocol UOMutableObject <NSObject>
 @optional
-- (void)synchronize;
-- (void)synchronizeWithObject:(UOObject *)object;
+- (instancetype)synchronize;
+- (instancetype)synchronizeWithObject:(UOObject *)object;
 @end

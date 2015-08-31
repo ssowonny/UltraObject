@@ -71,8 +71,24 @@ static NSMutableDictionary *__idProperties;
     return [[UOObjectManager sharedManager] objectWithClass:self.UOClass forID:ID];
 }
 
-+ (instancetype)new:(NSDictionary *)json {
++ (instancetype)newWithJSON:(NSDictionary *)json {
     UOObject *object = [[UOObjectManager sharedManager] objectWithClass:self.UOClass forJSON:json];
+    [object postEventWithType:UOEventTypeCreate];
+    return object;
+}
+
++ (instancetype)new:(UOEditBlock)block {
+    Class mutableClass = [[UOObjectManager sharedManager] mutableClassWithClass:self.UOClass];
+    UOObject<UOMutableObject> *mutableObject = [mutableClass new];
+    block(mutableObject);
+    
+    UOObject *object;
+    if (mutableObject.__id) {
+        object = [mutableObject synchronize];
+    } else {
+        object = [self.class new];
+        [mutableObject synchronizeWithObject:object];
+    }
     [object postEventWithType:UOEventTypeCreate];
     return object;
 }
@@ -150,8 +166,24 @@ static NSMutableDictionary *__idProperties;
 }
 
 - (void)edit:(UOEditBlock)block {
+    [self editWithJSON:nil block:block];
+}
+
+- (void)editWithJSON:(NSDictionary *)json {
+    [self editWithJSON:json block:nil];
+}
+
+- (void)editWithJSON:(NSDictionary *)json block:(UOEditBlock)block {
     UOObject<UOMutableObject> *mutableObject = [self mutableCopy];
-    block(mutableObject);
+    
+    if (json) {
+        [mutableObject importDictionary:json];
+    }
+    
+    if (block) {
+        block(mutableObject);
+    }
+    
     [mutableObject synchronizeWithObject:self];
 }
 

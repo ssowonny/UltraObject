@@ -13,14 +13,20 @@
 
 @implementation UOObject (UOMutableObject)
 
-- (void)synchronize {
+- (instancetype)synchronize {
+    NSAssert(self.__id, @"`__id` should not be nil.");
     UOObject *object = [[UOObjectManager sharedManager] objectWithClass:self.UOClass forID:self.__id];
-    [self synchronizeWithObject:object];
+    return [self synchronizeWithObject:object];
 }
 
-- (void)synchronizeWithObject:(UOObject *)object {
+- (instancetype)synchronizeWithObject:(UOObject *)object {
+    if (self.__id && ![(NSObject*)self.__id isEqual:object.__id]) {
+        [[UOObjectManager sharedManager] setObject:object forID:self.__id];
+    }
+    
     [object importDictionary:self.toDictionary];
     [object postEventWithType:UOEventTypeUpdate];
+    return object;
 }
 
 @end

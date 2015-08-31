@@ -23,7 +23,8 @@ typedef void (^UOEditBlock)(id<UOMutableObject>);
 + (instancetype)objectWithID:(UOID)ID;
 + (instancetype)objectWithJSON:(NSDictionary *)json;
 + (NSArray *)objectsWithJSONArray:(NSArray *)jsonArray;
-+ (instancetype)new:(NSDictionary *)json;
++ (instancetype)newWithJSON:(NSDictionary *)json;
++ (instancetype)new:(UOEditBlock)block;
 
 + (void)addObserverWithTarget:(id)target block:(UOEventBlock)block;
 + (void)removeObserverWithTarget:(id)target block:(UOEventBlock)block;
@@ -41,6 +42,8 @@ typedef void (^UOEditBlock)(id<UOMutableObject>);
 - (void)postEventWithType:(UOEventType)type userInfo:(NSDictionary *)userInfo;
 
 - (void)edit:(UOEditBlock)block;
+- (void)editWithJSON:(NSDictionary *)json;
+- (void)editWithJSON:(NSDictionary *)json block:(UOEditBlock)block;
 - (void)destroy;
 
 @end

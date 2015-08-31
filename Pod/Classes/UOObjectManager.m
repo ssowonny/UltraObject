@@ -80,6 +80,12 @@ static UOObjectManager *__sharedManager;
     }
 } }
 
+- (void)setObject:(UOObject *)object forID:(UOID)ID { @synchronized(self) {
+    NSMutableDictionary *objects = [self dictionaryForClass:object.UOClass];
+    NSAssert(!objects[ID], @"Object with id should be unique.");
+    objects[ID] = [NSValue valueWithNonretainedObject:object];
+} }
+
 #pragma mark - Private
 
 - (NSMutableDictionary *)dictionaryForClass:(Class)klass {
