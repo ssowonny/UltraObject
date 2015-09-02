@@ -41,7 +41,7 @@ static NSMutableDictionary *__idProperties;
 }
 
 - (void)set__id:(UOID)ID {
-    NSAssert(!__id, @"Identifier shouldn't be modified.");
+    NSAssert(!__id || [(NSObject *)__id isEqual:ID], @"Identifier shouldn't be modified.");
     
     if (!self.class.__idProperty) {
         return;

@@ -74,7 +74,7 @@ describe(@"UOPost", ^{
     
     it(@"should create new post", ^{
         NSDictionary *postJSON = @{@"id": @1, @"content": @"Hi There"};
-        UOPost *newPost = [UOPost new:postJSON];
+        UOPost *newPost = [UOPost newWithJSON:postJSON];
         expect(newPost.content).to.equal(postJSON[@"content"]);
     });
 });
@@ -111,7 +111,7 @@ describe(@"UOPost array", ^{
         
         it(@"should add an object", ^{
             NSUInteger postsCount = posts.count;
-            [UOPost new:postJSON];
+            [UOPost newWithJSON:postJSON];
             expect(posts.count).to.equal(postsCount + 1);
             expect(((UOPost *)posts.firstObject).content).to.equal(postJSON[@"content"]);
         });
@@ -119,7 +119,7 @@ describe(@"UOPost array", ^{
         it(@"should not add an object", ^{
             NSUInteger postsCount = posts.count;
             delegate.shouldIgnoreNewObject = YES;
-            [UOPost new:postJSON];
+            [UOPost newWithJSON:postJSON];
             expect(posts.count).to.equal(postsCount);
         });
     });

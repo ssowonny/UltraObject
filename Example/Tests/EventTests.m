@@ -51,7 +51,7 @@ describe(@"UOEventCenter", ^{
         }];
         
         expectedEventType = UOEventTypeCreate;
-        UOPost *post = [UOPost new:@{@"id": @1}];
+        UOPost *post = [UOPost newWithJSON:@{@"id": @1}];
         
         expectedEventType = UOEventTypeUpdate;
         [post edit:^(UOMutablePost *mutablePost) {

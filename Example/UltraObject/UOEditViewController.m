@@ -35,9 +35,9 @@ static NSUInteger __latestPostID = 100;
             post.content = _contentTextField.text;
         }];
     } else {
-        [UOPost new:@{@"id": @(__latestPostID ++),
-                      @"content": _contentTextField.text,
-                      @"user": @{@"id": @100, @"name": @"Guybrush Threepwood"}}];
+        [UOPost newWithJSON:@{@"id": @(__latestPostID ++),
+                              @"content": _contentTextField.text,
+                              @"user": @{@"id": @100, @"name": @"Guybrush Threepwood"}}];
     }
 }
 
