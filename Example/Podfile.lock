@@ -2,7 +2,7 @@ PODS:
   - Expecta (1.0.2)
   - JSONModel (1.1.0)
   - Specta (1.0.3)
-  - UltraObject (0.1.2):
+  - UltraObject (0.1.3):
     - JSONModel (~> 1.1.0)
 
 DEPENDENCIES:
@@ -18,6 +18,6 @@ SPEC CHECKSUMS:
   Expecta: 54e8a3530add08f4f0208c111355eda7cde74a53
   JSONModel: ec77e9865236a7a09d9cf7668df6b4b328d9ec1d
   Specta: cf3e4188cf35375c3ee2cd03f8db8f1f4ef98234
-  UltraObject: 70b70bc811e636fe6dea7501936f1d8931bd336f
+  UltraObject: 78657c9800873864c2167461e2bd13f1e1f078a5
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2
